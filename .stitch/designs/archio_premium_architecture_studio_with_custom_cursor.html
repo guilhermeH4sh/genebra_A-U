@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ARCHIO | Shaping the Silence</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&amp;family=Playfair+Display:wght@600;700&amp;family=Space+Grotesk:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&amp;family=Playfair+Display:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#313030",
+                        "surface-tint": "#feb87e",
+                        "on-primary-fixed": "#2e1500",
+                        "secondary": "#c8c6c3",
+                        "tertiary-container": "#929090",
+                        "primary-fixed": "#ffdcc2",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container-low": "#1c1b1b",
+                        "on-primary": "#4d2700",
+                        "error-container": "#93000a",
+                        "surface-bright": "#3a3939",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "on-error-container": "#ffdad6",
+                        "primary": "#feb87e",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "surface-container-highest": "#353534",
+                        "on-surface": "#e5e2e1",
+                        "secondary-fixed": "#e5e2df",
+                        "on-surface-variant": "#d6c3b6",
+                        "inverse-primary": "#865221",
+                        "tertiary": "#c8c6c5",
+                        "on-primary-fixed-variant": "#6a3b0b",
+                        "on-error": "#690005",
+                        "on-tertiary-container": "#2a2a2a",
+                        "on-secondary": "#31302f",
+                        "on-tertiary": "#313030",
+                        "error": "#ffb4ab",
+                        "outline": "#9f8d81",
+                        "on-background": "#e5e2e1",
+                        "outline-variant": "#52443a",
+                        "surface-container": "#201f1f",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "secondary-container": "#474745",
+                        "surface-container-high": "#2a2a2a",
+                        "surface": "#131313",
+                        "tertiary-fixed": "#e5e2e1",
+                        "background": "#131313",
+                        "secondary-fixed-dim": "#c8c6c3",
+                        "surface-variant": "#353534",
+                        "primary-fixed-dim": "#feb87e",
+                        "on-secondary-fixed": "#1c1c1a",
+                        "on-primary-container": "#432100",
+                        "inverse-surface": "#e5e2e1",
+                        "on-secondary-container": "#b7b5b2",
+                        "surface-dim": "#131313",
+                        "primary-container": "#c1834e",
+                        "on-secondary-fixed-variant": "#474745"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "section-gap": "160px",
+                        "margin-mobile": "24px",
+                        "margin-desktop": "80px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Montserrat"],
+                        "body-md": ["Montserrat"],
+                        "label-caps": ["Montserrat"],
+                        "headline-lg": ["Playfair Display"],
+                        "display-xl": ["Playfair Display"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "mono-label": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "32px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.2em", "fontWeight": "700"}],
+                        "headline-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display-xl": ["84px", {"lineHeight": "96px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["36px", {"lineHeight": "44px", "fontWeight": "600"}],
+                        "mono-label": ["11px", {"lineHeight": "14px", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            content: "";
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAzpLnW3hPcw6gPxIUsumI1vZG8LmI15G5LyNWHeYJ9V9zaNqd_ae7GPNcLpchCR0GLxJjltg888XlGRLl_5ob-13caF5EdASGX3na1koIxLtFWektLWajoscC3HQCLMFFalIwvCsnmmFVnXi-E7OacVnu-fOVnIokJHRXaXfQuf9kX1vj01kIxagNIS6sHD8hn6XEQSQLbAczlB34ImBmc-mEpgJJL8kMAvEfNPyNA0gpS4xORYvdsV5zr2nArpeIm7JpJPVcz81xT);
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 9999
+        }
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24
+        }
+        .scroll-reveal {
+            opacity: 0;
+            transform: translatey(20px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1)
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translatey(0)
+        }
+        .hover-img-zoom {
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1)
+        }
+        .project-card:hover .hover-img-zoom {
+            transform: scale(1.08)
+        }
+        ::-webkit-scrollbar {
+            width: 4px
+        }
+        ::-webkit-scrollbar-track {
+            background: #131313
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #474745
+        }
+
+        /* Custom Cursor Styles */
+        @media (min-width: 1024px) {
+            body {
+                cursor: none;
+            }
+            a, button, input, textarea, .project-card {
+                cursor: none;
+            }
+        }
+
+        #custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            border: 1px solid rgba(254, 184, 126, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate3d(var(--cursor-x, -100px), var(--cursor-y, -100px), 0);
+            transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            mix-blend-mode: difference;
+        }
+
+        #custom-cursor .cursor-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: #131313;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            pointer-events: none;
+            text-transform: uppercase;
+        }
+
+        #custom-cursor.active {
+            width: 48px;
+            height: 48px;
+            background-color: rgba(254, 184, 126, 0.2);
+            border-color: #feb87e;
+        }
+
+        #custom-cursor.view-mode {
+            width: 72px;
+            height: 72px;
+            background-color: #feb87e;
+            border-color: #feb87e;
+            mix-blend-mode: normal;
+        }
+
+        #custom-cursor.view-mode .cursor-text {
+            opacity: 1;
+        }
+
+        @media (max-width: 1023px) {
+            #custom-cursor {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary selection:text-on-primary-container">
+<div id="custom-cursor">
+<span class="cursor-text">View</span>
+</div>
+<div class="noise-overlay"></div>
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-outline-variant/30 flex justify-between items-center w-full px-margin-desktop py-gutter">
+<div class="font-display-xl text-headline-lg tracking-tighter text-on-background uppercase">ARCHIO</div>
+<div class="hidden md:flex items-center gap-10">
+<a class="font-body-lg text-body-lg text-primary border-b-2 border-primary pb-1 transition-colors duration-300" href="#">Projects</a>
+<a class="font-body-lg text-body-lg text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Studio</a>
+<a class="font-body-lg text-body-lg text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Process</a>
+<a class="font-body-lg text-body-lg text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Contact</a>
+</div>
+<button class="px-6 py-2 border border-primary text-primary font-label-caps uppercase hover:bg-primary hover:text-on-primary transition-all duration-300">
+            Inquire
+        </button>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative h-screen flex flex-col justify-center items-center overflow-hidden">
+
+<div class="relative z-10 text-center px-margin-mobile md:px-0">
+<p class="font-label-caps text-primary mb-6 tracking-[0.4em] uppercase opacity-0 animate-[fadeIn_1s_ease-out_forwards]">A New Language of Form</p>
+<h1 class="font-display-xl text-display-xl md:text-[140px] leading-none mb-12 tracking-tight opacity-0 animate-[fadeInUp_1.2s_ease-out_0.3s_forwards]">
+                    SHAPING THE<br/><span class="italic font-normal">SILENCE</span>
+</h1>
+<div class="opacity-0 animate-[fadeIn_1s_ease-out_0.8s_forwards]">
+<a class="inline-flex items-center gap-4 group" href="#portfolio">
+<span class="font-label-caps text-on-background border-b border-on-background/30 pb-2 group-hover:border-primary transition-all">Explore Portfolio</span>
+<span class="material-symbols-outlined text-primary group-hover:translate-x-2 transition-transform">arrow_right_alt</span>
+</a>
+</div>
+</div>
+<!-- Hero Bottom Stats -->
+<div class="absolute bottom-margin-desktop left-margin-desktop hidden lg:flex flex-col gap-2">
+<span class="font-mono-label text-on-surface-variant">EST. 2024</span>
+<span class="font-mono-label text-on-surface-variant">LONDON / TOKYO</span>
+</div>
+</section>
+<!-- Philosophy Section -->
+<section class="py-section-gap px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-gutter relative">
+<div class="md:col-span-12 mb-12">
+<h2 class="font-label-caps text-primary tracking-[0.3em] uppercase">Philosophy</h2>
+</div>
+<div class="md:col-span-7 scroll-reveal">
+<h3 class="font-display-xl text-headline-lg md:text-[64px] leading-tight mb-8">
+                    Less is not more. <br/>
+<span class="text-on-surface-variant">Less is enough.</span>
+</h3>
+</div>
+<div class="md:col-span-4 md:col-start-9 flex flex-col justify-end scroll-reveal" style="transition-delay: 0.2s;">
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                    We believe architecture is the art of subtracting the unnecessary until only the essential remains. Space is not a void to be filled, but a material to be sculpted.
+                </p>
+<div class="mt-10 pt-10 border-t border-outline-variant/30">
+<span class="font-mono-label block mb-2">01 — PRINCIPLE</span>
+<p class="font-body-md text-on-surface italic">"The quality of life is determined by the quality of the light that inhabits our spaces."</p>
+</div>
+</div>
+</section>
+<!-- Projects Grid -->
+<section class="px-margin-desktop pb-section-gap" id="portfolio">
+<div class="flex justify-between items-end mb-20">
+<h2 class="font-display-xl text-headline-lg">Selected Works</h2>
+<div class="hidden md:flex gap-4">
+<button class="p-4 border border-outline-variant hover:border-primary transition-colors">
+<span class="material-symbols-outlined">west</span>
+</button>
+<button class="p-4 border border-outline-variant hover:border-primary transition-colors">
+<span class="material-symbols-outlined">east</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+<!-- Project 1 -->
+<div class="project-card group cursor-pointer scroll-reveal">
+<div class="aspect-[3/4] overflow-hidden mb-6 relative">
+<img class="hover-img-zoom w-full h-full object-cover" data-alt="A cinematic photograph of a minimalist residential concrete villa, named Casa Brise." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDtKFwpcuU_9Xqx5wBmb5miOPNQK8UABfyHBW_p2Zbcxajco_UI0uNEF4f_RcWvNfVPBdL7hZC9cwMLFWg10taKTYarEO1uvgs5cZym9r8xHae9b2biQv2a0Ns4VpQnmkiRUiZ63312GIwvGs5HUVyJbCdIKAH3B_-bP6-yG3uTKu2uww7vA8_nshEHhFXNdNkAMc4RV3PCSMZFEXoQwcqJVewVMiRv4teR7cc7GYeXuPOhNYEFD6HniAQsSQN-QcXRqcjVUctZ-rH"/>
+<div class="absolute inset-0 bg-background/20 group-hover:bg-transparent transition-colors duration-700"></div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-caps text-primary text-[10px] mb-2 block uppercase">Residential</span>
+<h4 class="font-headline-lg text-body-lg font-bold group-hover:text-primary transition-colors">Casa Brise</h4>
+</div>
+<span class="font-mono-label text-on-surface-variant">2023</span>
+</div>
+</div>
+<!-- Project 2 -->
+<div class="project-card group cursor-pointer mt-12 scroll-reveal" style="transition-delay: 0.15s;">
+<div class="aspect-[3/4] overflow-hidden mb-6 relative">
+<img class="hover-img-zoom w-full h-full object-cover" data-alt="A monumental minimalist commercial headquarters building called Monolith HQ." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlZCa9GSyi-7DzGazlESqR2y69rz15RrFDXvvVOm1VqMpDidny4e4LaI83OUvUG2qU89hWTPuiXcoUCXrOYa5TI0vrzohJ2mw_DRVyC1GLkAZtCp14rbcXF9OdPcUTnMTZG9xkJ2eH1yaZLzev4YDAQeRwUF5fpn8geVi3DdVrJfQxWyfdYwXQ9nqdPUr004nmfifH5HyRGkCvsDiFyW62z5kPidkXzYJklkQbyfdC-JaQj-0MEkUPwQYMC_eY-MbNYoCL-giYazZa"/>
+<div class="absolute inset-0 bg-background/20 group-hover:bg-transparent transition-colors duration-700"></div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-caps text-primary text-[10px] mb-2 block uppercase">Commercial</span>
+<h4 class="font-headline-lg text-body-lg font-bold group-hover:text-primary transition-colors">Monolith HQ</h4>
+</div>
+<span class="font-mono-label text-on-surface-variant">2022</span>
+</div>
+</div>
+<!-- Project 3 -->
+<div class="project-card group cursor-pointer scroll-reveal" style="transition-delay: 0.3s;">
+<div class="aspect-[3/4] overflow-hidden mb-6 relative">
+<img class="hover-img-zoom w-full h-full object-cover" data-alt="An interior shot of The Minimal Loft." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCw008fqosbltW0c-hfCcPwr4AyPiQttXvHpTOyNNvJdAWVyox68ztTEqtyoPXQlfsXzctaPiOvfM2soFGZbPj8B5up9uK6LlnjEhafd9ikHYdXAh_06pXEXWA9Y0bf2fRP8NRYDukrdyiB6WEYlzFTllppMFq1QmyNenzFwJFQAsnTHYA3-OgDOXfZZgel37ws3XKsgmL3bNt7da7cY8jYrpYn_ViL9FgvmWlgSDA8-f8CNNA7YNPSF8BorCWKdBJCIsDXAMihs345"/>
+<div class="absolute inset-0 bg-background/20 group-hover:bg-transparent transition-colors duration-700"></div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-caps text-primary text-[10px] mb-2 block uppercase">Interiors</span>
+<h4 class="font-headline-lg text-body-lg font-bold group-hover:text-primary transition-colors">The Minimal Loft</h4>
+</div>
+<span class="font-mono-label text-on-surface-variant">2024</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Process Section -->
+<section class="bg-surface-container-low py-section-gap px-margin-desktop overflow-hidden">
+<div class="max-w-6xl mx-auto">
+<div class="text-center mb-24">
+<h2 class="font-label-caps text-primary tracking-[0.4em] mb-6 uppercase">The Process</h2>
+<h3 class="font-display-xl text-headline-lg">From Void to Structure</h3>
+</div>
+<div class="relative flex flex-col md:flex-row justify-between items-start gap-12">
+<!-- Connector line -->
+<div class="absolute top-[32px] left-0 w-full h-[1px] bg-outline-variant/30 hidden md:block"></div>
+<!-- Step 1 -->
+<div class="relative z-10 flex-1 group scroll-reveal">
+<div class="w-16 h-16 rounded-full bg-background border border-primary flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-primary">lightbulb</span>
+</div>
+<h4 class="font-headline-lg text-[24px] mb-4">Vision</h4>
+<p class="text-on-surface-variant font-body-md pr-6">Understanding the narrative of the site and the aspirations of the inhabitant.</p>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex-1 group scroll-reveal" style="transition-delay: 0.2s;">
+<div class="w-16 h-16 rounded-full bg-background border border-primary flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-primary">architecture</span>
+</div>
+<h4 class="font-headline-lg text-[24px] mb-4">Blueprint</h4>
+<p class="text-on-surface-variant font-body-md pr-6">Precise engineering meets avant-garde design to define the skeletal truth.</p>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex-1 group scroll-reveal" style="transition-delay: 0.4s;">
+<div class="w-16 h-16 rounded-full bg-background border border-primary flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-primary">layers</span>
+</div>
+<h4 class="font-headline-lg text-[24px] mb-4">Materialization</h4>
+<p class="text-on-surface-variant font-body-md">The physical realization where texture, light, and mass coalesce into permanence.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-section-gap px-margin-desktop border-b border-outline-variant/10">
+<div class="max-w-4xl mx-auto text-center scroll-reveal">
+<span class="material-symbols-outlined text-primary text-5xl mb-8">format_quote</span>
+<blockquote class="font-headline-lg text-headline-lg-mobile md:text-headline-lg italic mb-12">
+                    "Archio doesn't just build structures; they curate experiences. Our new gallery is a masterclass in light and proportion."
+                </blockquote>
+<cite class="not-italic">
+<span class="font-label-caps text-on-background block tracking-[0.2em]">ELARA VANCE</span>
+<span class="font-mono-label text-on-surface-variant uppercase">Director, The Obsidian Foundation</span>
+</cite>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="py-section-gap px-margin-desktop grid grid-cols-1 lg:grid-cols-2 gap-32">
+<div class="scroll-reveal">
+<h2 class="font-display-xl text-headline-lg mb-8">Start a<br/>Conversation</h2>
+<p class="font-body-lg text-on-surface-variant mb-12">Whether it's a private residence or a global landmark, we are ready to redefine your space.</p>
+<div class="space-y-6">
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-primary">mail</span>
+<a class="font-body-lg hover:text-primary transition-colors" href="mailto:studio@archio.com">studio@archio.com</a>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<span class="font-body-lg">22 Bruton Pl, London, W1J 6NE</span>
+</div>
+</div>
+</div>
+<div class="scroll-reveal" style="transition-delay: 0.3s;">
+<form class="space-y-12">
+<div class="relative">
+<input class="peer w-full bg-transparent border-0 border-b border-outline-variant py-4 focus:ring-0 focus:border-primary transition-colors text-body-lg" id="name" placeholder=" " type="text"/>
+<label class="absolute top-4 left-0 font-label-caps text-on-surface-variant uppercase transition-all duration-300 peer-placeholder-shown:text-body-lg peer-placeholder-shown:normal-case peer-focus:top-[-20px] peer-focus:text-[10px] peer-focus:text-primary peer-[:not(:placeholder-shown)]:top-[-20px] peer-[:not(:placeholder-shown)]:text-[10px]" for="name">Full Name</label>
+</div>
+<div class="relative">
+<input class="peer w-full bg-transparent border-0 border-b border-outline-variant py-4 focus:ring-0 focus:border-primary transition-colors text-body-lg" id="email" placeholder=" " type="email"/>
+<label class="absolute top-4 left-0 font-label-caps text-on-surface-variant uppercase transition-all duration-300 peer-placeholder-shown:text-body-lg peer-placeholder-shown:normal-case peer-focus:top-[-20px] peer-focus:text-[10px] peer-focus:text-primary peer-[:not(:placeholder-shown)]:top-[-20px] peer-[:not(:placeholder-shown)]:text-[10px]" for="email">Email Address</label>
+</div>
+<div class="relative">
+<textarea class="peer w-full bg-transparent border-0 border-b border-outline-variant py-4 focus:ring-0 focus:border-primary transition-colors text-body-lg resize-none" id="message" placeholder=" " rows="1"></textarea>
+<label class="absolute top-4 left-0 font-label-caps text-on-surface-variant uppercase transition-all duration-300 peer-placeholder-shown:text-body-lg peer-placeholder-shown:normal-case peer-focus:top-[-20px] peer-focus:text-[10px] peer-focus:text-primary peer-[:not(:placeholder-shown)]:top-[-20px] peer-[:not(:placeholder-shown)]:text-[10px]" for="message">Project Inquiry</label>
+</div>
+<button class="w-full py-6 border border-primary text-primary font-label-caps uppercase hover:bg-primary hover:text-on-primary transition-all duration-500 tracking-widest">
+                        Submit Request
+                    </button>
+</form>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant/30 w-full py-section-gap px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-gutter items-start">
+<div class="md:col-span-4">
+<h2 class="font-display-xl text-headline-lg-mobile text-on-surface uppercase mb-6">ARCHIO</h2>
+<p class="font-body-md text-on-surface-variant max-w-xs">
+                An architecture and design studio dedicated to the pursuit of spatial clarity and material honesty.
+            </p>
+</div>
+<div class="md:col-span-2 md:col-start-7 flex flex-col gap-4">
+<span class="font-label-caps text-primary text-[10px] mb-2">NETWORK</span>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-all duration-500 focus:underline underline-offset-8" href="#">Instagram</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-all duration-500 focus:underline underline-offset-8" href="#">LinkedIn</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-all duration-500 focus:underline underline-offset-8" href="#">Pinterest</a>
+</div>
+<div class="md:col-span-2 flex flex-col gap-4">
+<span class="font-label-caps text-primary text-[10px] mb-2">STUDIO</span>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-all duration-500 focus:underline underline-offset-8" href="#">Journal</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-all duration-500 focus:underline underline-offset-8" href="#">Privacy</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-all duration-500 focus:underline underline-offset-8" href="#">Legal</a>
+</div>
+<div class="md:col-span-12 mt-24 border-t border-outline-variant/10 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
+<span class="font-mono-label text-on-surface-variant">© 2024 ARCHIO STUDIO. ALL RIGHTS RESERVED.</span>
+<div class="flex gap-10">
+<span class="font-mono-label text-on-surface-variant">V 1.0.2</span>
+<span class="font-mono-label text-on-surface-variant">SCROLL UP ↑</span>
+</div>
+</div>
+</footer>
+<script>
+        // Simple Intersection Observer for scroll reveal animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll implementation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Auto-expand textarea
+        const messageBox = document.getElementById('message');
+        if (messageBox) {
+            messageBox.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
+            });
+        }
+
+        // Custom Cursor Implementation
+        const cursor = document.getElementById('custom-cursor');
+        let mouseX = 0;
+        let mouseY = 0;
+        let cursorX = 0;
+        let cursorY = 0;
+        const speed = 0.15; // Adjustment for lag effect
+
+        function updateCursorPosition() {
+            const distX = mouseX - cursorX;
+            const distY = mouseY - cursorY;
+
+            cursorX = cursorX + (distX * speed);
+            cursorY = cursorY + (distY * speed);
+
+            cursor.style.setProperty('--cursor-x', `${cursorX}px`);
+            cursor.style.setProperty('--cursor-y', `${cursorY}px`);
+
+            requestAnimationFrame(updateCursorPosition);
+        }
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX - (cursor.offsetWidth / 2);
+            mouseY = e.clientY - (cursor.offsetHeight / 2);
+        });
+
+        updateCursorPosition();
+
+        // Handle interactive element hovers
+        const interactiveElements = document.querySelectorAll('a, button, input, textarea');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+        });
+
+        // Handle project card hovers for 'VIEW' mode
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach(card => {
+            card.addEventListener('mouseenter', () => cursor.classList.add('view-mode'));
+            card.addEventListener('mouseleave', () => cursor.classList.remove('view-mode'));
+        });
+
+        // Hide cursor when leaving window
+        document.addEventListener('mouseleave', () => {
+            cursor.style.opacity = '0';
+        });
+        document.addEventListener('mouseenter', () => {
+            cursor.style.opacity = '1';
+        });
+
+    </script>
+</body></html>
