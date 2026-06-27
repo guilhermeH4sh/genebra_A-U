@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>O Estúdio | Genebra Arquitetura & Urbanismo</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><line x1='15' y1='70' x2='85' y2='70' stroke='%23E29A67' stroke-width='2' stroke-linecap='round'/><path d='M52,20 L46,25 L46,70 L52,70 Z' stroke='%23E29A67' stroke-width='2' fill='none' stroke-linejoin='round'/><path d='M52,20 L58,23 L58,70 L52,70 Z' stroke='%23E29A67' stroke-width='2' fill='none' stroke-linejoin='round'/><path d='M46,32 L42,36 L42,70 L46,70 Z' stroke='%23E29A67' stroke-width='2' fill='none' stroke-linejoin='round'/><path d='M46,32 L50,36 L50,70 L46,70 Z' stroke='%23E29A67' stroke-width='2' fill='%23E29A67' stroke-linejoin='round'/><path d='M58,43 L54,46 L54,70 L58,70 Z' stroke='%23E29A67' stroke-width='2' fill='none' stroke-linejoin='round'/><path d='M58,43 L64,48 L64,70 L58,70 Z' stroke='%23E29A67' stroke-width='2' fill='none' stroke-linejoin='round'/><path d='M42,51 L37,54 L37,70 L42,70 Z' stroke='%23E29A67' stroke-width='2' fill='none' stroke-linejoin='round'/><path d='M42,51 L40,54 L40,70 L42,70 Z' stroke='%23E29A67' stroke-width='2' fill='%23E29A67' stroke-linejoin='round'/></svg>"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&amp;family=Playfair+Display:wght@600;700&amp;family=Space+Grotesk:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&amp;family=Playfair+Display:wght@100..900&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#E29A67", // Cobre sofisticado
+                        "on-primary": "#0E0E0E",
+                        "background": "#0E0E0E", // Preto profundo uniforme
+                        "surface": "#161616", // Grafite escuro para blocos
+                        "on-surface": "#F5F5F5", // Off-white para títulos/textos principais
+                        "on-background": "#F5F5F5", // Off-white
+                        "secondary": "#A3A3A3", // Cinza médio para textos secundários
+                        "on-surface-variant": "#A3A3A3", // Compatibilidade
+                        "outline-variant": "#2A2A2A", // Borda nítida
+                        "surface-container-low": "#121212", // Seções ligeiramente destacadas
+                        "surface-container-lowest": "#060606" // Footer profundo
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "section-gap": "120px",
+                        "margin-mobile": "24px",
+                        "margin-desktop": "80px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Montserrat"],
+                        "body-md": ["Montserrat"],
+                        "label-caps": ["Montserrat"],
+                        "headline-lg": ["Playfair Display"],
+                        "display-xl": ["Playfair Display"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "mono-label": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "32px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.2em", "fontWeight": "700"}],
+                        "headline-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display-xl": ["84px", {"lineHeight": "96px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["36px", {"lineHeight": "44px", "fontWeight": "600"}],
+                        "mono-label": ["11px", {"lineHeight": "14px", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            content: "";
+            background-image: url(assets/images/noise.png);
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 9999
+        }
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24
+        }
+        .scroll-reveal {
+            opacity: 0;
+            transform: translatey(20px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1)
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translatey(0)
+        }
+        ::-webkit-scrollbar {
+            width: 4px
+        }
+        ::-webkit-scrollbar-track {
+            background: #0E0E0E
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2A2A2A
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary selection:text-on-primary">
+    <div class="noise-overlay"></div>
+    
+    <!-- Navegação Sólida de Alto Contraste -->
+    <nav class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant flex justify-between items-center px-margin-desktop py-gutter">
+        <a href="index.html" class="font-display-xl text-headline-lg tracking-tighter text-on-background uppercase hover:text-primary transition-colors duration-300">GENEBRA</a>
+        <div class="hidden md:flex items-center gap-10">
+            <a class="font-body-lg text-body-lg text-secondary hover:text-primary transition-colors duration-300" href="projetos.html">Projetos</a>
+            <a class="font-body-lg text-body-lg text-primary border-b-2 border-primary pb-1 transition-colors duration-300" href="studio.html">Estúdio</a>
+            <a class="font-body-lg text-body-lg text-secondary hover:text-primary transition-colors duration-300" href="processo.html">Processo</a>
+            <a class="font-body-lg text-body-lg text-secondary hover:text-primary transition-colors duration-300" href="contato.html">Contato</a>
+        </div>
+        <a href="contato.html" class="px-6 py-2 border border-primary text-primary font-label-caps uppercase hover:bg-primary hover:text-on-primary transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary">
+            Orçamento
+        </a>
+    </nav>
+
+    <main class="pt-32">
+        <!-- Manifesto do Estúdio -->
+        <section class="px-margin-desktop py-12">
+            <div class="max-w-4xl">
+                <p class="font-label-caps text-primary mb-4 tracking-[0.3em] uppercase">Quem Somos</p>
+                <h1 class="font-display-xl text-5xl md:text-7xl leading-tight mb-8">
+                    Espaços pautados pela<br/><span class="italic font-normal text-secondary">clareza e verdade material</span>
+                </h1>
+            </div>
+        </section>
+
+        <!-- Nossa História -->
+        <section class="py-section-gap px-margin-desktop grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+            <div class="lg:col-span-5 scroll-reveal">
+                <h2 class="font-label-caps text-primary tracking-[0.2em] mb-6 uppercase">A Fundação</h2>
+                <h3 class="font-display-xl text-4xl mb-8">Unindo a precisão técnica e a liberdade poética.</h3>
+            </div>
+            <div class="lg:col-span-6 lg:col-start-7 flex flex-col justify-between scroll-reveal" style="transition-delay: 0.2s;">
+                <p class="font-body-lg text-body-lg text-secondary mb-6">
+                    Fundado em 2024, o Genebra surge do desejo de criar uma arquitetura que responda ao excesso do mundo contemporâneo. Diante do ruído, escolhemos a sobriedade. Diante da decoração artificial, celebramos a textura honesta do concreto, do metal, da pedra e da madeira.
+                </p>
+                <p class="font-body-lg text-body-lg text-secondary">
+                    Nossa prática engloba projetos residenciais de alto padrão, edifícios comerciais icônicos e design de interiores refinados, mantendo sempre a mesma busca incessante por proporções ideais e pela entrada precisa de luz natural.
+                </p>
+            </div>
+        </section>
+
+        <!-- Filosofia & Princípios em Grafite -->
+        <section class="bg-surface-container-low py-section-gap px-margin-desktop border-y border-outline-variant">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-20 scroll-reveal">
+                    <h2 class="font-label-caps text-primary tracking-[0.3em] mb-4 uppercase">Valores Primordiais</h2>
+                    <h3 class="font-display-xl text-4xl">Como moldamos a nossa prática</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <!-- Princípio 1 -->
+                    <div class="p-8 border border-outline-variant bg-surface scroll-reveal">
+                        <span class="font-mono-label text-primary block mb-4">01 / SUBTRAÇÃO</span>
+                        <h4 class="font-headline-lg text-2xl mb-4">Essencialismo</h4>
+                        <p class="text-secondary">Eliminamos tudo aquilo que compete com a essência do espaço. Cada linha possui uma função estrutural ou poética explícita.</p>
+                    </div>
+                    <!-- Princípio 2 -->
+                    <div class="p-8 border border-outline-variant bg-surface scroll-reveal" style="transition-delay: 0.2s;">
+                        <span class="font-mono-label text-primary block mb-4">02 / LUZ E SOMBRA</span>
+                        <h4 class="font-headline-lg text-2xl mb-4">Atmosfera</h4>
+                        <p class="text-secondary">Trabalhamos a luz como um material tangível. A luz esculpe os volumes internos e cria atmosferas que se transformam ao longo do dia.</p>
+                    </div>
+                    <!-- Princípio 3 -->
+                    <div class="p-8 border border-outline-variant bg-surface scroll-reveal" style="transition-delay: 0.4s;">
+                        <span class="font-mono-label text-primary block mb-4">03 / VERDADE</span>
+                        <h4 class="font-headline-lg text-2xl mb-4">Honestidade Material</h4>
+                        <p class="text-secondary">Os materiais são aplicados em seu estado mais autêntico. Não escondemos imperfeições naturais, nós as valorizamos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prêmios & Reconhecimento -->
+        <section class="py-section-gap px-margin-desktop">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="font-label-caps text-primary tracking-[0.2em] mb-12 text-center uppercase">Reconhecimento</h2>
+                <div class="divide-y divide-outline-variant">
+                    <div class="py-6 flex justify-between items-center scroll-reveal">
+                        <div>
+                            <h4 class="font-headline-lg text-xl text-on-background">Prêmio de Arquitetura Contemporânea</h4>
+                            <p class="text-sm text-secondary">Categoria Edifício Residencial — Casa Brise</p>
+                        </div>
+                        <span class="font-mono-label text-primary">2025</span>
+                    </div>
+                    <div class="py-6 flex justify-between items-center scroll-reveal" style="transition-delay: 0.1s;">
+                        <div>
+                            <h4 class="font-headline-lg text-xl text-on-background">Bienal de Arquitetura Minimalista</h4>
+                            <p class="text-sm text-secondary">Destaque em Design de Interiores — Loft Minimalista</p>
+                        </div>
+                        <span class="font-mono-label text-primary">2024</span>
+                    </div>
+                    <div class="py-6 flex justify-between items-center scroll-reveal" style="transition-delay: 0.2s;">
+                        <div>
+                            <h4 class="font-headline-lg text-xl text-on-background">Prêmio Green Design Internacional</h4>
+                            <p class="text-sm text-secondary">Sustentabilidade e Estruturas de Vanguarda — Monolith HQ</p>
+                        </div>
+                        <span class="font-mono-label text-primary">2023</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé Sólido e Elegante -->
+    <footer class="bg-surface-container-lowest border-t border-outline-variant w-full py-section-gap px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-gutter items-start">
+        <div class="md:col-span-4">
+            <h2 class="font-display-xl text-headline-lg-mobile text-on-background uppercase mb-6">GENEBRA</h2>
+            <p class="font-body-md text-secondary max-w-xs">
+                Um estúdio de arquitetura e urbanismo dedicado à busca pela clareza espacial e honestidade material.
+            </p>
+        </div>
+        <div class="md:col-span-2 md:col-start-7 flex flex-col gap-4">
+            <span class="font-label-caps text-primary text-[10px] mb-2">CONECTAR</span>
+            <a class="font-body-md text-secondary hover:text-primary transition-all duration-300" href="#">Instagram</a>
+            <a class="font-body-md text-secondary hover:text-primary transition-all duration-300" href="#">LinkedIn</a>
+            <a class="font-body-md text-secondary hover:text-primary transition-all duration-300" href="#">Pinterest</a>
+        </div>
+        <div class="md:col-span-2 flex flex-col gap-4">
+            <span class="font-label-caps text-primary text-[10px] mb-2">ESTÚDIO</span>
+            <a class="font-body-md text-secondary hover:text-primary transition-all duration-300" href="studio.html">Filosofia</a>
+            <a class="font-body-md text-secondary hover:text-primary transition-all duration-300" href="processo.html">Processo</a>
+            <a class="font-body-md text-secondary hover:text-primary transition-all duration-300" href="contato.html">Contato</a>
+        </div>
+        <div class="md:col-span-12 mt-24 border-t border-outline-variant pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
+            <span class="font-mono-label text-secondary">© 2026 GENEBRA ARQUITETURA & URBANISMO. TODOS OS DIREITOS RESERVADOS.</span>
+            <div class="flex gap-10">
+                <span class="font-mono-label text-secondary">V 1.0.2</span>
+                <span class="font-mono-label text-secondary hover:text-primary transition-colors cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">VOLTAR AO TOPO ↑</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer para animações de scroll reveal
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
