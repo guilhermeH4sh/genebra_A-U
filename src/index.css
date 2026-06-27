@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-on-background font-body-md selection:bg-primary selection:text-on-primary;
+  }
+}
+
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background-image: url(/assets/images/noise.png);
+  opacity: 0.02;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+}
+
+/* Scroll reveal e transições */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hover-img-zoom {
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .hover-img-zoom {
+  transform: scale(1.08);
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0E0E0E;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2A2A2A;
+}
+
+/* Animações de entrada do Hero */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 1.2s ease-out forwards;
+}
