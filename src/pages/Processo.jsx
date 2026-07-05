@@ -1,5 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import BlueprintCanvas from '../components/BlueprintCanvas.jsx'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const PHASES_DATA = [
   {
@@ -66,44 +70,63 @@ const PHASES_DATA = [
 
 export default function Processo() {
   const [activePhase, setActivePhase] = useState(1)
+  const mainRef = useRef(null)
 
+  // 1. Entrada de página global no Scroll
   useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    }
+    const ctx = gsap.context(() => {
+      gsap.fromTo('.processo-header-subtitle',
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
+      )
+      gsap.fromTo('.processo-header-title',
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1.2, ease: 'power4.out', delay: 0.1 }
+      )
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
+      gsap.fromTo('.metodologia-board',
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.metodologia-board',
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+          }
         }
-      })
-    }, observerOptions)
+      )
+    }, mainRef)
 
-    document.querySelectorAll('.scroll-reveal').forEach(el => {
-      observer.observe(el)
-    })
-
-    return () => observer.disconnect()
+    return () => ctx.revert()
   }, [])
+
+  // 2. Animação de transição ao alternar etapas
+  useEffect(() => {
+    gsap.fromTo('.phase-details-content',
+      { opacity: 0, x: -20 },
+      { opacity: 1, x: 0, duration: 0.6, ease: 'power2.out' }
+    )
+  }, [activePhase])
 
   const currentPhaseData = PHASES_DATA.find(p => p.num === activePhase)
 
   return (
-    <main className="pt-32">
+    <main ref={mainRef} className="pt-32">
       {/* Cabeçalho da Página */}
       <section className="px-margin-desktop py-12">
         <div className="max-w-4xl">
-          <p className="font-label-caps text-primary mb-4 tracking-[0.3em] uppercase">Metodologia</p>
-          <h1 className="font-display-xl text-5xl md:text-7xl leading-tight mb-8">
+          <p className="processo-header-subtitle font-label-caps text-primary mb-4 tracking-[0.3em] uppercase opacity-0">Metodologia</p>
+          <h1 className="processo-header-title font-display-xl text-5xl md:text-7xl leading-tight mb-8 opacity-0">
             A jornada do vazio<br/><span className="italic font-normal text-secondary">ao espaço habitado</span>
           </h1>
         </div>
       </section>
 
       {/* Prancha Interativa de Metodologia */}
-      <section className="py-section-gap px-margin-desktop">
+      <section className="metodologia-board py-section-gap px-margin-desktop opacity-0">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
           
           {/* Coluna Esquerda: Timeline e Detalhes da Fase */}
@@ -135,7 +158,7 @@ export default function Processo() {
             </div>
 
             {/* Conteúdo Detalhado da Fase Ativa */}
-            <div key={activePhase} className="space-y-6 animate-fadeIn">
+            <div className="phase-details-content space-y-6">
               <span className="font-mono-label text-primary tracking-widest">{currentPhaseData.tag}</span>
               <h2 className="font-display-xl text-3xl md:text-5xl uppercase">{currentPhaseData.title}</h2>
               <h3 className="font-headline-lg text-lg md:text-xl text-primary font-bold">{currentPhaseData.subtitle}</h3>
@@ -160,7 +183,7 @@ export default function Processo() {
           </div>
 
           {/* Coluna Direita: Prancha Técnica Digital (BlueprintCanvas) */}
-          <div className="lg:col-span-5 lg:sticky lg:top-32 flex justify-center scroll-reveal">
+          <div className="lg:col-span-5 lg:sticky lg:top-32 flex justify-center">
             <BlueprintCanvas phase={activePhase} />
           </div>
 

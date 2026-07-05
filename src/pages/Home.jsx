@@ -1,6 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import BlueprintSlider from '../components/BlueprintSlider.jsx'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const FEATURED_PROJECT = {
   title: "Casa Brise",
@@ -11,39 +15,135 @@ const FEATURED_PROJECT = {
 }
 
 export default function Home() {
+  const mainRef = useRef(null)
+
   useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    }
+    const ctx = gsap.context(() => {
+      // 1. ANIMAÇÕES DE ENTRADA DO HERO
+      const tl = gsap.timeline()
+      
+      tl.fromTo('.hero-subtitle', 
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
+      )
+      
+      tl.fromTo('.hero-title',
+        { opacity: 0, y: 35 },
+        { opacity: 1, y: 0, duration: 1.2, ease: 'power4.out' },
+        '-=0.5'
+      )
+      
+      tl.fromTo('.hero-btn',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
+        '-=0.6'
+      )
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
+      tl.fromTo('.hero-stats',
+        { opacity: 0, x: -20 },
+        { opacity: 0.6, x: 0, duration: 1.0, ease: 'power3.out' },
+        '-=0.7'
+      )
+
+      // 2. SEÇÃO FILOSOFIA - REVEAL NO SCROLL
+      gsap.fromTo('.filosofia-title',
+        { opacity: 0, y: 40 },
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 1.2, 
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.filosofia-section',
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+          }
         }
-      })
-    }, observerOptions)
+      )
 
-    document.querySelectorAll('.scroll-reveal').forEach(el => {
-      observer.observe(el)
-    })
+      gsap.fromTo('.filosofia-content',
+        { opacity: 0, y: 40 },
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 1.2, 
+          delay: 0.2,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.filosofia-section',
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+          }
+        }
+      )
 
-    return () => observer.disconnect()
+      // 3. SEÇÃO SLIDER INTERATIVO - REVEAL NO SCROLL
+      gsap.fromTo('.destaque-slider-section',
+        { opacity: 0, y: 40 },
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 1.2, 
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.destaque-slider-section',
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+          }
+        }
+      )
+
+      // 4. GRADE DE DESTAQUES DO PORTFÓLIO - STAGGER
+      gsap.fromTo('.project-card-item',
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.0,
+          stagger: 0.2,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.project-cards-grid',
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+          }
+        }
+      )
+
+      // 5. DEPOIMENTOS - REVEAL NO SCROLL
+      gsap.fromTo('.depoimento-box',
+        { opacity: 0, y: 40, scale: 0.97 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.2,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.depoimento-box',
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          }
+        }
+      )
+
+    }, mainRef)
+
+    return () => ctx.revert()
   }, [])
 
   return (
-    <main className="pt-20">
+    <main ref={mainRef} className="pt-20">
       {/* Seção Hero */}
       <section className="relative h-[90vh] flex flex-col justify-center items-center overflow-hidden">
         <div className="relative z-10 text-center px-margin-mobile md:px-0">
-          <p className="font-label-caps text-primary mb-6 tracking-[0.4em] uppercase animate-fadeIn">
+          <p className="hero-subtitle font-label-caps text-primary mb-6 tracking-[0.4em] uppercase opacity-0">
             Uma Nova Linguagem da Forma
           </p>
-          <h1 className="font-display-xl text-display-xl md:text-[120px] leading-none mb-12 tracking-tight animate-fadeInUp">
+          <h1 className="hero-title font-display-xl text-display-xl md:text-[120px] leading-none mb-12 tracking-tight opacity-0">
             ESCULPINDO O<br/><span className="italic font-normal text-secondary">SILÊNCIO</span>
           </h1>
-          <div className="animate-fadeIn" style={{ animationDelay: '0.8s' }}>
+          <div className="hero-btn opacity-0">
             <Link className="inline-flex items-center gap-4 group" to="/projetos">
               <span className="font-label-caps text-on-background border-b border-on-background/30 pb-2 group-hover:border-primary transition-all">
                 Explorar Portfólio
@@ -55,24 +155,24 @@ export default function Home() {
           </div>
         </div>
         {/* Hero Bottom Stats */}
-        <div className="absolute bottom-margin-desktop left-margin-desktop hidden lg:flex flex-col gap-2">
+        <div className="hero-stats absolute bottom-margin-desktop left-margin-desktop hidden lg:flex flex-col gap-2 opacity-0">
           <span className="font-mono-label text-secondary">FUNDADO EM 2024</span>
           <span className="font-mono-label text-secondary">SÃO PAULO / LONDRES</span>
         </div>
       </section>
 
       {/* Seção Filosofia (Estúdio) */}
-      <section className="py-section-gap px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-gutter relative">
+      <section className="filosofia-section py-section-gap px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-gutter relative">
         <div className="md:col-span-12 mb-12">
           <h2 className="font-label-caps text-primary tracking-[0.3em] uppercase">Filosofia</h2>
         </div>
-        <div className="md:col-span-7 scroll-reveal">
+        <div className="filosofia-title md:col-span-7 opacity-0">
           <h3 className="font-display-xl text-headline-lg md:text-[64px] leading-tight mb-8">
             Menos não é mais. <br/>
             <span className="text-secondary">Menos é o suficiente.</span>
           </h3>
         </div>
-        <div className="md:col-span-4 md:col-start-9 flex flex-col justify-end scroll-reveal" style={{ transitionDelay: '0.2s' }}>
+        <div className="filosofia-content md:col-span-4 md:col-start-9 flex flex-col justify-end opacity-0">
           <p className="font-body-lg text-body-lg text-secondary">
             Acreditamos que a arquitetura é a arte de subtrair o desnecessário até restar apenas o essencial. O espaço não é um vazio a ser preenchido, mas um material a ser esculpido.
           </p>
@@ -88,7 +188,7 @@ export default function Home() {
       </section>
 
       {/* Seção Destaque Interativo */}
-      <section className="px-margin-desktop pb-section-gap scroll-reveal">
+      <section className="destaque-slider-section px-margin-desktop pb-section-gap opacity-0">
         <div className="mb-12">
           <span className="font-mono-label text-primary block mb-2">02 — INTERATIVIDADE</span>
           <h2 className="font-display-xl text-3xl md:text-5xl uppercase">Estrutura Revelada</h2>
@@ -107,9 +207,9 @@ export default function Home() {
             Ver Todos
           </Link>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+        <div className="project-cards-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {/* Projeto 1 */}
-          <Link to="/projetos" className="project-card group scroll-reveal block">
+          <Link to="/projetos" className="project-card-item group block opacity-0">
             <div className="aspect-[3/4] overflow-hidden mb-6 relative">
               <img className="hover-img-zoom w-full h-full object-cover" alt="Fotografia de villa minimalista de concreto, Casa Brise." src="assets/images/casa_brise.png"/>
               <div className="absolute inset-0 bg-background/20 group-hover:bg-transparent transition-colors duration-700"></div>
@@ -123,7 +223,7 @@ export default function Home() {
             </div>
           </Link>
           {/* Projeto 2 */}
-          <Link to="/projetos" className="project-card group mt-12 scroll-reveal block" style={{ transitionDelay: '0.15s' }}>
+          <Link to="/projetos" className="project-card-item group mt-12 block opacity-0">
             <div className="aspect-[3/4] overflow-hidden mb-6 relative">
               <img className="hover-img-zoom w-full h-full object-cover" alt="Sede comercial minimalista, Monolith HQ." src="assets/images/monolith_hq.png"/>
               <div className="absolute inset-0 bg-background/20 group-hover:bg-transparent transition-colors duration-700"></div>
@@ -137,7 +237,7 @@ export default function Home() {
             </div>
           </Link>
           {/* Projeto 3 */}
-          <Link to="/projetos" className="project-card group scroll-reveal block" style={{ transitionDelay: '0.3s' }}>
+          <Link to="/projetos" className="project-card-item group block opacity-0">
             <div className="aspect-[3/4] overflow-hidden mb-6 relative">
               <img className="hover-img-zoom w-full h-full object-cover" alt="Design de interiores do Minimal Loft." src="assets/images/minimal_loft.png"/>
               <div className="absolute inset-0 bg-background/20 group-hover:bg-transparent transition-colors duration-700"></div>
@@ -155,7 +255,7 @@ export default function Home() {
 
       {/* Depoimentos */}
       <section className="py-section-gap px-margin-desktop border-b border-outline-variant">
-        <div className="max-w-4xl mx-auto text-center scroll-reveal">
+        <div className="depoimento-box max-w-4xl mx-auto text-center opacity-0">
           <span className="material-symbols-outlined text-primary text-5xl mb-8">format_quote</span>
           <blockquote className="font-headline-lg text-headline-lg-mobile md:text-headline-lg italic mb-12 text-on-background">
             "A Genebra não constrói apenas estruturas; eles curam experiências. Nossa nova galeria é uma obra-prima de luz e proporção."
