@@ -187,16 +187,41 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Seção Destaque Interativo */}
-      <section className="destaque-slider-section px-margin-desktop pb-section-gap opacity-0">
-        <div className="mb-12">
-          <span className="font-mono-label text-primary block mb-2">02 — INTERATIVIDADE</span>
-          <h2 className="font-display-xl text-3xl md:text-5xl uppercase">Estrutura Revelada</h2>
-          <p className="text-secondary text-body-md mt-2 max-w-xl">
-            Arraste o divisor sobre a obra em destaque para alternar entre a volumetria estrutural (desenho CAD) e a fotografia finalizada.
+      {/* Seção Destaque Interativo (Layout Split Refinado) */}
+      <section className="destaque-slider-section px-margin-desktop pb-section-gap opacity-0 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+        {/* Esquerda: Info Técnica */}
+        <div className="lg:col-span-4 space-y-8">
+          <div>
+            <span className="font-mono-label text-primary block mb-3 tracking-[0.2em]">02 // INTERATIVIDADE</span>
+            <h2 className="font-display-xl text-3xl md:text-5xl uppercase leading-[1.1] mb-4">Estrutura<br/>Revelada</h2>
+            <div className="h-[2px] w-12 bg-primary"></div>
+          </div>
+          
+          <p className="text-secondary text-body-md leading-relaxed">
+            Deslize o divisor na maquete ao lado para alternar entre a volumetria estrutural (desenho técnico CAD) e a fotografia finalizada da obra, revelando a precisão oculta na forma.
           </p>
+          
+          <div className="border-t border-outline-variant pt-6 space-y-3 font-mono text-[10px] text-secondary">
+            <div className="flex justify-between border-b border-outline-variant/35 pb-2">
+              <span>PROJETO:</span>
+              <span className="text-on-surface font-bold">CASA BRISE</span>
+            </div>
+            <div className="flex justify-between border-b border-outline-variant/35 pb-2">
+              <span>ESTRUTURA:</span>
+              <span className="text-on-surface">CONCRETO E AÇO</span>
+            </div>
+            <div className="flex justify-between">
+              <span>ESCALA:</span>
+              <span className="text-primary font-bold">ESC 1:125</span>
+            </div>
+          </div>
         </div>
-        <BlueprintSlider project={FEATURED_PROJECT} />
+
+        {/* Direita: Blueprint Slider */}
+        <div className="lg:col-span-8 shadow-2xl relative">
+          <div className="absolute -inset-1 border border-primary/20 pointer-events-none z-10 m-[2px]"></div>
+          <BlueprintSlider project={FEATURED_PROJECT} />
+        </div>
       </section>
 
       {/* Destaques do Portfólio */}
