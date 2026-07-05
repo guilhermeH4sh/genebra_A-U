@@ -7,6 +7,7 @@ import Projetos from './pages/Projetos.jsx'
 import Studio from './pages/Studio.jsx'
 import Processo from './pages/Processo.jsx'
 import Contato from './pages/Contato.jsx'
+import CustomCursor from './components/CustomCursor.jsx'
 
 // Helper para rolar para o topo automaticamente na troca de páginas
 function ScrollToTop() {
@@ -23,10 +24,16 @@ export default function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen flex flex-col justify-between selection:bg-primary selection:text-on-primary font-body-md text-on-background bg-background relative">
+      <CustomCursor />
+      <div className="min-h-screen flex flex-col justify-between selection:bg-primary selection:text-on-primary font-body-md text-on-background bg-background relative overflow-hidden">
         <div className="noise-overlay"></div>
+        
+        {/* Grade técnica sutil no fundo global */}
+        <div className="blueprint-grid-bg opacity-30"></div>
+        <div className="blueprint-grid-bg-fine opacity-20"></div>
+        
         <Header />
-        <div className="flex-grow">
+        <div className="flex-grow relative z-10">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/projetos" element={<Projetos />} />

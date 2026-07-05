@@ -1,5 +1,14 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import BlueprintSlider from '../components/BlueprintSlider.jsx'
+
+const FEATURED_PROJECT = {
+  title: "Casa Brise",
+  category: "residencial",
+  categoryLabel: "Residencial",
+  img: "assets/images/casa_brise.png",
+  alt: "Fotografia de villa minimalista de concreto, Casa Brise."
+}
 
 export default function Home() {
   useEffect(() => {
@@ -76,6 +85,18 @@ export default function Home() {
             <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">east</span>
           </Link>
         </div>
+      </section>
+
+      {/* Seção Destaque Interativo */}
+      <section className="px-margin-desktop pb-section-gap scroll-reveal">
+        <div className="mb-12">
+          <span className="font-mono-label text-primary block mb-2">02 — INTERATIVIDADE</span>
+          <h2 className="font-display-xl text-3xl md:text-5xl uppercase">Estrutura Revelada</h2>
+          <p className="text-secondary text-body-md mt-2 max-w-xl">
+            Arraste o divisor sobre a obra em destaque para alternar entre a volumetria estrutural (desenho CAD) e a fotografia finalizada.
+          </p>
+        </div>
+        <BlueprintSlider project={FEATURED_PROJECT} />
       </section>
 
       {/* Destaques do Portfólio */}

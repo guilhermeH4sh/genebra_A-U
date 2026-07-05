@@ -1,6 +1,72 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import BlueprintCanvas from '../components/BlueprintCanvas.jsx'
+
+const PHASES_DATA = [
+  {
+    num: 1,
+    tag: "FASE 01 / 05",
+    title: "Diálogo",
+    subtitle: "Briefing & Leitura do Lugar",
+    description: "Investigamos as reais necessidades e ambições estéticas do cliente. Em paralelo, realizamos um estudo topográfico e bioclimático rigoroso do terreno para entender a orientação solar, ventos predominantes e a narrativa existente no entorno.",
+    bullets: [
+      "Reuniões conceituais detalhadas",
+      "Análise bioclimática e topográfica",
+      "Definição do programa de necessidades"
+    ]
+  },
+  {
+    num: 2,
+    tag: "FASE 02 / 05",
+    title: "Conceito",
+    subtitle: "Estudos de Volumetria",
+    description: "Desenvolvemos os primeiros esboços e estudos volumétricos. Criamos maquetes tridimensionais físicas ou digitais para testar proporções, relações de cheios e vazios e a entrada de luz. O conceito é refinado até atingir a simplicidade essencial desejada.",
+    bullets: [
+      "Imagens conceituais tridimensionais (3D)",
+      "Estudos de luz e insolação",
+      "Definição preliminar de materiais"
+    ]
+  },
+  {
+    num: 3,
+    tag: "FASE 03 / 05",
+    title: "Projeto",
+    subtitle: "Desenho Técnico & Executivo",
+    description: "Aprovado o conceito, avançamos para o projeto executivo. Cada junção de materiais, detalhes de esquadrias ocultas e sistemas prediais são desenhados de forma a ficarem invisíveis, assegurando que o foco permaneça puramente na forma espacial.",
+    bullets: [
+      "Projeto executivo detalhado",
+      "Compatibilização estrutural e hidráulica",
+      "Detalhamento minucioso de marcenaria e acabamentos"
+    ]
+  },
+  {
+    num: 4,
+    tag: "FASE 04 / 05",
+    title: "Material",
+    subtitle: "Acompanhamento e Obra",
+    description: "Acompanhamos a execução da obra de perto. Garantimos que a textura do concreto aparente seja perfeita, que o alinhamento das pedras atenda ao projeto e que todas as especificações técnicas sejam rigorosamente seguidas pela construtora.",
+    bullets: [
+      "Visitas técnicas periódicas à obra",
+      "Alinhamento estrito com engenheiros e mestres de obra",
+      "Validação e controle de qualidade de acabamentos"
+    ]
+  },
+  {
+    num: 5,
+    tag: "FASE 05 / 05",
+    title: "Espaço",
+    subtitle: "Entrega & Vivência",
+    description: "O espaço físico é finalmente entregue ao morador ou usuário. Realizamos o ensaio fotográfico final e iniciamos a etapa de verificação de uso pós-ocupação, compreendendo como a luz e a volumetria respondem ao cotidiano real.",
+    bullets: [
+      "Entrega oficial das chaves e memorial técnico",
+      "Produção fotográfica de arquitetura",
+      "Avaliação de pós-ocupação após 6 meses"
+    ]
+  }
+]
 
 export default function Processo() {
+  const [activePhase, setActivePhase] = useState(1)
+
   useEffect(() => {
     const observerOptions = {
       threshold: 0.1,
@@ -22,6 +88,8 @@ export default function Processo() {
     return () => observer.disconnect()
   }, [])
 
+  const currentPhaseData = PHASES_DATA.find(p => p.num === activePhase)
+
   return (
     <main className="pt-32">
       {/* Cabeçalho da Página */}
@@ -34,103 +102,68 @@ export default function Processo() {
         </div>
       </section>
 
-      {/* Etapas do Processo em Grafite e Cobre */}
+      {/* Prancha Interativa de Metodologia */}
       <section className="py-section-gap px-margin-desktop">
-        <div className="max-w-5xl mx-auto divide-y divide-outline-variant">
-          {/* Fase 1 */}
-          <div className="py-16 grid grid-cols-1 md:grid-cols-12 gap-8 scroll-reveal">
-            <div className="md:col-span-3">
-              <span className="font-mono-label text-primary block mb-2">FASE 01 / 05</span>
-              <h3 className="font-headline-lg text-2xl font-bold uppercase text-on-background">Diálogo</h3>
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+          
+          {/* Coluna Esquerda: Timeline e Detalhes da Fase */}
+          <div className="lg:col-span-7 space-y-12">
+            
+            {/* Seletor horizontal de fases */}
+            <div className="flex justify-between items-center border-b border-outline-variant pb-6">
+              {PHASES_DATA.map((p) => (
+                <button
+                  key={p.num}
+                  onClick={() => setActivePhase(p.num)}
+                  className="flex flex-col items-center group focus:outline-none"
+                >
+                  <span className={`font-mono text-xs mb-2 transition-colors ${
+                    activePhase === p.num ? 'text-primary font-bold' : 'text-secondary group-hover:text-primary'
+                  }`}>
+                    0{p.num}
+                  </span>
+                  <div className={`w-8 h-[2px] transition-all duration-300 ${
+                    activePhase === p.num ? 'bg-primary scale-x-125' : 'bg-outline-variant group-hover:bg-primary/50'
+                  }`}></div>
+                  <span className={`hidden md:block font-label-caps text-[9px] uppercase mt-2 tracking-wider transition-colors ${
+                    activePhase === p.num ? 'text-primary' : 'text-secondary opacity-60 group-hover:text-primary'
+                  }`}>
+                    {p.title}
+                  </span>
+                </button>
+              ))}
             </div>
-            <div className="md:col-span-9 md:col-start-4">
-              <h4 className="font-headline-lg text-xl mb-4 text-primary">Briefing & Leitura do Lugar</h4>
-              <p className="text-secondary text-body-lg mb-6">
-                Investigamos as reais necessidades e ambições estéticas do cliente. Em paralelo, realizamos um estudo topográfico e bioclimático rigoroso do terreno para entender a orientação solar, ventos predominantes e a narrativa existente no entorno.
+
+            {/* Conteúdo Detalhado da Fase Ativa */}
+            <div key={activePhase} className="space-y-6 animate-fadeIn">
+              <span className="font-mono-label text-primary tracking-widest">{currentPhaseData.tag}</span>
+              <h2 className="font-display-xl text-3xl md:text-5xl uppercase">{currentPhaseData.title}</h2>
+              <h3 className="font-headline-lg text-lg md:text-xl text-primary font-bold">{currentPhaseData.subtitle}</h3>
+              
+              <p className="text-secondary text-body-lg leading-relaxed">
+                {currentPhaseData.description}
               </p>
-              <ul className="space-y-2 text-sm text-primary">
-                <li>• Reuniões conceituais detalhadas</li>
-                <li>• Análise bioclimática e topográfica</li>
-                <li>• Definição do programa de necessidades</li>
-              </ul>
+
+              <div className="pt-6 border-t border-outline-variant">
+                <span className="font-mono-label block mb-4 text-[10px] text-primary">ENTREGÁVEIS E ATIVIDADES</span>
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {currentPhaseData.bullets.map((bullet, idx) => (
+                    <li key={idx} className="flex items-center gap-3 text-sm text-on-surface">
+                      <span className="w-1.5 h-1.5 bg-primary rounded-full"></span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
+
           </div>
 
-          {/* Fase 2 */}
-          <div className="py-16 grid grid-cols-1 md:grid-cols-12 gap-8 scroll-reveal" style={{ transitionDelay: '0.1s' }}>
-            <div className="md:col-span-3">
-              <span className="font-mono-label text-primary block mb-2">FASE 02 / 05</span>
-              <h3 className="font-headline-lg text-2xl font-bold uppercase text-on-background">Conceito</h3>
-            </div>
-            <div className="md:col-span-9 md:col-start-4">
-              <h4 className="font-headline-lg text-xl mb-4 text-primary">Estudos de Volumetria</h4>
-              <p className="text-secondary text-body-lg mb-6">
-                Desenvolvemos os primeiros esboços e estudos volumétricos. Criamos maquetes tridimensionais físicas ou digitais para testar proporções, relações de cheios e vazios e a entrada de luz. O conceito é refinado até atingir a simplicidade essencial desejada.
-              </p>
-              <ul className="space-y-2 text-sm text-primary">
-                <li>• Imagens conceituais tridimensionais (3D)</li>
-                <li>• Estudos de luz e insolação</li>
-                <li>• Definição preliminar de materiais</li>
-              </ul>
-            </div>
+          {/* Coluna Direita: Prancha Técnica Digital (BlueprintCanvas) */}
+          <div className="lg:col-span-5 lg:sticky lg:top-32 flex justify-center scroll-reveal">
+            <BlueprintCanvas phase={activePhase} />
           </div>
 
-          {/* Fase 3 */}
-          <div className="py-16 grid grid-cols-1 md:grid-cols-12 gap-8 scroll-reveal" style={{ transitionDelay: '0.2s' }}>
-            <div className="md:col-span-3">
-              <span className="font-mono-label text-primary block mb-2">FASE 03 / 05</span>
-              <h3 className="font-headline-lg text-2xl font-bold uppercase text-on-background">Projeto</h3>
-            </div>
-            <div className="md:col-span-9 md:col-start-4">
-              <h4 className="font-headline-lg text-xl mb-4 text-primary">Desenho Técnico & Executivo</h4>
-              <p className="text-secondary text-body-lg mb-6">
-                Aprovado o conceito, avançamos para o projeto executivo. Cada junção de materiais, detalhes de esquadrias ocultas e sistemas prediais são desenhados de forma a ficarem invisíveis, assegurando que o foco permaneça puramente na forma espacial.
-              </p>
-              <ul className="space-y-2 text-sm text-primary">
-                <li>• Projeto executivo detalhado</li>
-                <li>• Compatibilização estrutural e hidráulica</li>
-                <li>• Detalhamento minucioso de marcenaria e acabamentos</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Fase 4 */}
-          <div className="py-16 grid grid-cols-1 md:grid-cols-12 gap-8 scroll-reveal" style={{ transitionDelay: '0.3s' }}>
-            <div className="md:col-span-3">
-              <span className="font-mono-label text-primary block mb-2">FASE 04 / 05</span>
-              <h3 className="font-headline-lg text-2xl font-bold uppercase text-on-background">Material</h3>
-            </div>
-            <div className="md:col-span-9 md:col-start-4">
-              <h4 className="font-headline-lg text-xl mb-4 text-primary">Acompanhamento e Obra</h4>
-              <p className="text-secondary text-body-lg mb-6">
-                Acompanhamos a execução da obra de perto. Garantimos que a textura do concreto aparente seja perfeita, que o alinhamento das pedras atenda ao projeto e que todas as especificações técnicas sejam rigorosamente seguidas pela construtora.
-              </p>
-              <ul className="space-y-2 text-sm text-primary">
-                <li>• Visitas técnicas periódicas à obra</li>
-                <li>• Alinhamento estrito com engenheiros e mestres de obra</li>
-                <li>• Validação e controle de qualidade de acabamentos</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Fase 5 */}
-          <div className="py-16 grid grid-cols-1 md:grid-cols-12 gap-8 scroll-reveal" style={{ transitionDelay: '0.4s' }}>
-            <div className="md:col-span-3">
-              <span className="font-mono-label text-primary block mb-2">FASE 05 / 05</span>
-              <h3 className="font-headline-lg text-2xl font-bold uppercase text-on-background">Espaço</h3>
-            </div>
-            <div className="md:col-span-9 md:col-start-4">
-              <h4 className="font-headline-lg text-xl mb-4 text-primary">Entrega & Vivência</h4>
-              <p className="text-secondary text-body-lg mb-6">
-                O espaço físico é finalmente entregue ao morador ou usuário. Realizamos o ensaio fotográfico final e iniciamos a etapa de verificação de uso pós-ocupação, compreendendo como a luz e a volumetria respondem ao cotidiano real.
-              </p>
-              <ul className="space-y-2 text-sm text-primary">
-                <li>• Entrega oficial das chaves e memorial técnico</li>
-                <li>• Produção fotográfica de arquitetura</li>
-                <li>• Avaliação de pós-ocupação após 6 meses</li>
-              </ul>
-            </div>
-          </div>
         </div>
       </section>
     </main>

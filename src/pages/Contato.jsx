@@ -1,15 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import ScopeArchitect from '../components/ScopeArchitect.jsx'
 
 export default function Contato() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    projectType: 'residencial',
-    budget: 'low',
-    message: ''
-  })
-  const [submitted, setSubmitted] = useState(false)
-
   useEffect(() => {
     const observerOptions = {
       threshold: 0.1,
@@ -31,29 +23,6 @@ export default function Contato() {
     return () => observer.disconnect()
   }, [])
 
-  const handleInputChange = (e) => {
-    const { id, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [id]: value
-    }))
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setSubmitted(true)
-    setTimeout(() => {
-      setSubmitted(false)
-      setFormData({
-        name: '',
-        email: '',
-        projectType: 'residencial',
-        budget: 'low',
-        message: ''
-      })
-    }, 4000)
-  }
-
   return (
     <main className="pt-32">
       {/* Cabeçalho da Página */}
@@ -66,143 +35,50 @@ export default function Contato() {
         </div>
       </section>
 
-      {/* Formulário & Detalhes de Contato */}
-      <section className="py-12 px-margin-desktop pb-section-gap grid grid-cols-1 lg:grid-cols-2 gap-32">
-        {/* Esquerda: Info de Contato */}
-        <div className="scroll-reveal">
-          <p className="font-body-lg text-secondary mb-12">
-            Seja para uma residência privativa exclusiva ou um edifício comercial icônico, estamos prontos para receber o seu projeto. Preencha o briefing preliminar ao lado para iniciarmos o diálogo.
-          </p>
-          <div className="space-y-8">
-            <div className="flex items-center gap-6">
-              <span className="material-symbols-outlined text-primary">mail</span>
-              <div>
-                <span className="text-xs text-secondary block uppercase font-mono-label">E-mail Comercial</span>
-                <a className="font-body-lg hover:text-primary transition-colors text-on-background" href="mailto:contato@genebra.arq.br">
-                  contato@genebra.arq.br
-                </a>
-              </div>
+      {/* Cartões de Contato Rápidos em Grid */}
+      <section className="px-margin-desktop pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 border-y border-outline-variant py-10">
+          <div className="flex items-center gap-6">
+            <span className="material-symbols-outlined text-primary text-3xl">mail</span>
+            <div>
+              <span className="text-[9px] text-secondary block uppercase font-mono-label">E-mail Comercial</span>
+              <a className="font-body-md hover:text-primary transition-colors text-on-background" href="mailto:contato@genebra.arq.br">
+                contato@genebra.arq.br
+              </a>
             </div>
-            <div className="flex items-center gap-6">
-              <span className="material-symbols-outlined text-primary">location_on</span>
-              <div>
-                <span className="text-xs text-secondary block uppercase font-mono-label">Estúdio Principal</span>
-                <span className="font-body-lg text-on-background">Av. Brigadeiro Faria Lima, 3477 - Itaim Bibi, São Paulo - SP</span>
-              </div>
+          </div>
+          <div className="flex items-center gap-6">
+            <span className="material-symbols-outlined text-primary text-3xl">location_on</span>
+            <div>
+              <span className="text-[9px] text-secondary block uppercase font-mono-label">Estúdio Principal</span>
+              <span className="font-body-md text-on-background text-sm">Av. Brig. Faria Lima, 3477 - São Paulo - SP</span>
             </div>
-            <div className="flex items-center gap-6">
-              <span className="material-symbols-outlined text-primary">call</span>
-              <div>
-                <span className="text-xs text-secondary block uppercase font-mono-label">Telefone</span>
-                <a className="font-body-lg hover:text-primary transition-colors text-on-background" href="tel:+5599999999999">
-                  +5599999999999
-                </a>
-              </div>
+          </div>
+          <div className="flex items-center gap-6">
+            <span className="material-symbols-outlined text-primary text-3xl">call</span>
+            <div>
+              <span className="text-[9px] text-secondary block uppercase font-mono-label">Telefone</span>
+              <a className="font-body-md hover:text-primary transition-colors text-on-background" href="tel:+5599999999999">
+                +5599999999999
+              </a>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Direita: Formulário de Briefing com fundo perceptível */}
-        <div className="scroll-reveal" style={{ transitionDelay: '0.2s' }}>
-          {submitted ? (
-            <div className="bg-surface p-10 border border-primary text-center space-y-6">
-              <span className="material-symbols-outlined text-primary text-5xl">check_circle</span>
-              <h3 className="font-display-xl text-2xl text-on-background font-bold">Mensagem Enviada!</h3>
-              <p className="text-secondary font-body-md">Agradecemos o contato. Retornaremos sua solicitação em até 48 horas.</p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-12 bg-surface p-10 border border-outline-variant">
-              <div className="relative">
-                <input 
-                  className="peer w-full bg-transparent border-0 border-b border-outline-variant py-4 focus:ring-0 focus:border-primary transition-colors text-body-lg text-on-background" 
-                  id="name" 
-                  placeholder=" " 
-                  type="text" 
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                />
-                <label className="absolute top-4 left-0 font-label-caps text-secondary uppercase transition-all duration-300 peer-placeholder-shown:text-body-lg peer-placeholder-shown:normal-case peer-focus:top-[-20px] peer-focus:text-[10px] peer-focus:text-primary peer-[:not(:placeholder-shown)]:top-[-20px] peer-[:not(:placeholder-shown)]:text-[10px]" htmlFor="name">
-                  Nome Completo
-                </label>
-              </div>
-              <div className="relative">
-                <input 
-                  className="peer w-full bg-transparent border-0 border-b border-outline-variant py-4 focus:ring-0 focus:border-primary transition-colors text-body-lg text-on-background" 
-                  id="email" 
-                  placeholder=" " 
-                  type="email" 
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                />
-                <label className="absolute top-4 left-0 font-label-caps text-secondary uppercase transition-all duration-300 peer-placeholder-shown:text-body-lg peer-placeholder-shown:normal-case peer-focus:top-[-20px] peer-focus:text-[10px] peer-focus:text-primary peer-[:not(:placeholder-shown)]:top-[-20px] peer-[:not(:placeholder-shown)]:text-[10px]" htmlFor="email">
-                  Endereço de E-mail
-                </label>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                  <label className="block font-label-caps text-secondary uppercase text-[10px] mb-3" htmlFor="projectType">
-                    Tipo de Projeto
-                  </label>
-                  <select 
-                    className="w-full bg-transparent border-0 border-b border-outline-variant py-3 focus:ring-0 focus:border-primary text-on-background text-sm cursor-pointer" 
-                    id="projectType"
-                    value={formData.projectType}
-                    onChange={handleInputChange}
-                  >
-                    <option className="bg-surface" value="residencial">Residencial de Alto Padrão</option>
-                    <option className="bg-surface" value="comercial">Comercial / Corporativo</option>
-                    <option className="bg-surface" value="interiores">Interiores / Corporativos</option>
-                    <option className="bg-surface" value="outro">Outros Segmentos</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block font-label-caps text-secondary uppercase text-[10px] mb-3" htmlFor="budget">
-                    Investimento Previsto
-                  </label>
-                  <select 
-                    className="w-full bg-transparent border-0 border-b border-outline-variant py-3 focus:ring-0 focus:border-primary text-on-background text-sm cursor-pointer" 
-                    id="budget"
-                    value={formData.budget}
-                    onChange={handleInputChange}
-                  >
-                    <option className="bg-surface" value="low">Até R$ 800.000</option>
-                    <option className="bg-surface" value="medium">R$ 800.000 a R$ 2.000.000</option>
-                    <option className="bg-surface" value="high">Acima de R$ 2.000.000</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="relative">
-                <textarea 
-                  className="peer w-full bg-transparent border-0 border-b border-outline-variant py-4 focus:ring-0 focus:border-primary transition-colors text-body-lg text-on-background resize-none overflow-hidden" 
-                  id="message" 
-                  placeholder=" " 
-                  rows="2" 
-                  value={formData.message}
-                  onChange={(e) => {
-                    handleInputChange(e)
-                    e.target.style.height = 'auto'
-                    e.target.style.height = e.target.scrollHeight + 'px'
-                  }}
-                  required
-                ></textarea>
-                <label className="absolute top-4 left-0 font-label-caps text-secondary uppercase transition-all duration-300 peer-placeholder-shown:text-body-lg peer-placeholder-shown:normal-case peer-focus:top-[-20px] peer-focus:text-[10px] peer-focus:text-primary peer-[:not(:placeholder-shown)]:top-[-20px] peer-[:not(:placeholder-shown)]:text-[10px]" htmlFor="message">
-                  Escreva sobre suas ideias para a obra...
-                </label>
-              </div>
-
-              <button 
-                type="submit" 
-                className="w-full py-6 border border-primary text-primary font-label-caps uppercase hover:bg-primary hover:text-on-primary transition-all duration-500 tracking-widest focus:outline-none focus:ring-2 focus:ring-primary"
-              >
-                Enviar Solicitação
-              </button>
-            </form>
-          )}
+      {/* Seção Principal: Simulador e Calculadora de Viabilidade ScopeArchitect */}
+      <section className="px-margin-desktop pb-section-gap pt-12 scroll-reveal">
+        <div className="mb-12">
+          <span className="font-mono-label text-primary block mb-2">ESTUDO DE CASO E VIABILIDADE</span>
+          <h2 className="font-display-xl text-3xl md:text-5xl uppercase">Configurar Projeto Preliminar</h2>
+          <p className="text-secondary text-body-md mt-2 max-w-2xl">
+            Ajuste a maquete digital interativa abaixo. Nossos sistemas calculam as estimativas de investimento e complexidade técnica em tempo real.
+          </p>
         </div>
+        
+        <ScopeArchitect onFormSubmit={(data) => {
+          console.log("Briefing de projeto recebido com sucesso:", data)
+        }} />
       </section>
     </main>
   )

@@ -81,3 +81,127 @@
 .animate-fadeInUp {
   animation: fadeInUp 1.2s ease-out forwards;
 }
+
+/* CAD Cursor Customizado */
+@media (pointer: fine) {
+  .custom-cursor-active,
+  .custom-cursor-active * {
+    cursor: none !important;
+  }
+}
+
+.cad-cursor-follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(226, 154, 103, 0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, border-color 0.2s, background-color 0.2s;
+  mix-blend-mode: difference;
+}
+
+.cad-cursor-follower.hovering {
+  width: 48px;
+  height: 48px;
+  border-color: rgba(226, 154, 103, 0.8);
+  background-color: rgba(226, 154, 103, 0.05);
+}
+
+.cad-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  background-color: #E29A67;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10001;
+  transform: translate(-50%, -50%);
+}
+
+.cad-cursor-coords {
+  position: fixed;
+  pointer-events: none;
+  font-family: 'Space Grotesk', monospace;
+  font-size: 8px;
+  color: rgba(226, 154, 103, 0.6);
+  z-index: 10002;
+  margin-left: 20px;
+  margin-top: 10px;
+  white-space: nowrap;
+}
+
+/* Linhas guias do Cursor CAD */
+.cad-cursor-axis-x, .cad-cursor-axis-y {
+  position: fixed;
+  background-color: rgba(226, 154, 103, 0.04);
+  pointer-events: none;
+  z-index: 9999;
+}
+.cad-cursor-axis-x {
+  top: 0;
+  height: 100vh;
+  width: 1px;
+}
+.cad-cursor-axis-y {
+  left: 0;
+  width: 100vw;
+  height: 1px;
+}
+
+/* Malha técnica de blueprint */
+.blueprint-grid-bg {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(226, 154, 103, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(226, 154, 103, 0.02) 1px, transparent 1px);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.blueprint-grid-bg-fine {
+  background-size: 8px 8px;
+  background-image: 
+    linear-gradient(to right, rgba(226, 154, 103, 0.008) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(226, 154, 103, 0.008) 1px, transparent 1px);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+@keyframes drawStroke {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-draw {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: drawStroke 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Vidro técnico/Glassmorphism */
+.technical-card {
+  background: rgba(22, 22, 22, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(42, 42, 42, 0.6);
+}
+
+.technical-card:hover {
+  border-color: rgba(226, 154, 103, 0.3);
+}
+
+/* Blueprint Look para imagens */
+.blueprint-image-layer {
+  filter: brightness(0.5) contrast(1.5) sepia(1) hue-rotate(195deg) saturate(10) brightness(0.7);
+  opacity: 0.9;
+}
+
