@@ -34,13 +34,14 @@ export default {
         unit: "8px"
       },
       fontFamily: {
-        "body-lg": ["Inter", "sans-serif"],
-        "body-md": ["Inter", "sans-serif"],
-        "label-caps": ["Inter", "sans-serif"],
-        "headline-lg": ["Inter", "sans-serif"],
-        "display-xl": ["Inter", "sans-serif"],
-        "headline-lg-mobile": ["Inter", "sans-serif"],
-        "mono-label": ["Inter", "sans-serif"]
+        "serif": ["Fraunces", "serif"],
+        "body-lg": ["Cormorant Garamond", "serif"],
+        "body-md": ["Outfit", "sans-serif"],
+        "label-caps": ["Outfit", "sans-serif"],
+        "headline-lg": ["Fraunces", "serif"],
+        "display-xl": ["Fraunces", "serif"],
+        "headline-lg-mobile": ["Fraunces", "serif"],
+        "mono-label": ["Outfit", "sans-serif"]
       },
       fontSize: {
         "body-lg": ["18px", { lineHeight: "32px", letterSpacing: "0.01em", fontWeight: "400" }],

@@ -114,9 +114,12 @@ export default function Processo() {
   const currentPhaseData = PHASES_DATA.find(p => p.num === activePhase)
 
   return (
-    <main ref={mainRef} className="pt-32">
+    <main ref={mainRef} className="pt-32 min-h-screen relative overflow-hidden">
+      {/* Background blueprint grid */}
+      <div className="blueprint-grid-bg opacity-30 pointer-events-none"></div>
+
       {/* Cabeçalho da Página */}
-      <section className="px-margin-desktop py-12">
+      <section className="px-margin-mobile md:px-margin-desktop py-12 relative z-10">
         <div className="max-w-4xl">
           <p className="processo-header-subtitle font-label-caps text-primary mb-4 tracking-[0.3em] uppercase opacity-0">Metodologia</p>
           <h1 className="processo-header-title font-display-xl text-5xl md:text-7xl leading-tight mb-8 opacity-0">
@@ -126,30 +129,35 @@ export default function Processo() {
       </section>
 
       {/* Prancha Interativa de Metodologia */}
-      <section className="metodologia-board py-section-gap px-margin-desktop opacity-0">
+      <section className="metodologia-board py-section-gap px-margin-mobile md:px-margin-desktop opacity-0 relative z-10">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
           
           {/* Coluna Esquerda: Timeline e Detalhes da Fase */}
           <div className="lg:col-span-7 space-y-12">
             
-            {/* Seletor horizontal de fases */}
-            <div className="flex justify-between items-center border-b border-outline-variant pb-6">
+            {/* Seletor horizontal de fases (Timeline contínua) */}
+            <div className="relative flex justify-between items-center pb-8">
+              {/* Linha contínua de fundo */}
+              <div className="absolute left-0 bottom-[39px] w-full h-[1px] bg-outline-variant/30 z-0"></div>
+              
               {PHASES_DATA.map((p) => (
                 <button
                   key={p.num}
                   onClick={() => setActivePhase(p.num)}
-                  className="flex flex-col items-center group focus:outline-none"
+                  className="relative z-10 flex flex-col items-center group focus:outline-none"
                 >
-                  <span className={`font-mono text-xs mb-2 transition-colors ${
+                  <span className={`font-mono text-xs mb-2 transition-colors duration-300 ${
                     activePhase === p.num ? 'text-primary font-bold' : 'text-secondary group-hover:text-primary'
                   }`}>
                     0{p.num}
                   </span>
-                  <div className={`w-8 h-[2px] transition-all duration-300 ${
-                    activePhase === p.num ? 'bg-primary scale-x-125' : 'bg-outline-variant group-hover:bg-primary/50'
+                  <div className={`w-3 h-3 rounded-full transition-all duration-500 border-2 ${
+                    activePhase === p.num 
+                      ? 'bg-primary border-primary scale-125 shadow-[0_0_10px_rgba(212,106,67,0.5)]' 
+                      : 'bg-background border-outline-variant group-hover:border-primary/50'
                   }`}></div>
-                  <span className={`hidden md:block font-label-caps text-[9px] uppercase mt-2 tracking-wider transition-colors ${
-                    activePhase === p.num ? 'text-primary' : 'text-secondary opacity-60 group-hover:text-primary'
+                  <span className={`hidden md:block font-label-caps text-[9px] uppercase mt-3 tracking-wider transition-colors duration-300 ${
+                    activePhase === p.num ? 'text-primary font-bold' : 'text-secondary opacity-60 group-hover:text-primary'
                   }`}>
                     {p.title}
                   </span>
@@ -167,7 +175,7 @@ export default function Processo() {
                 {currentPhaseData.description}
               </p>
 
-              <div className="pt-6 border-t border-outline-variant">
+              <div className="pt-6 border-t border-outline-variant/30">
                 <span className="font-mono-label block mb-4 text-[10px] text-primary">ENTREGÁVEIS E ATIVIDADES</span>
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {currentPhaseData.bullets.map((bullet, idx) => (

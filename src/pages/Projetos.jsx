@@ -91,9 +91,12 @@ export default function Projetos() {
     : PROJETOS_DATA.filter(p => p.category === activeCategory)
 
   return (
-    <main className="pt-32 min-h-screen">
+    <main className="pt-32 min-h-screen relative overflow-hidden">
+      {/* Background blueprint grid */}
+      <div className="blueprint-grid-bg opacity-30 pointer-events-none"></div>
+
       {/* Cabeçalho da Página */}
-      <section className="px-margin-desktop py-12">
+      <section className="px-margin-mobile md:px-margin-desktop py-12 relative z-10">
         <div className="max-w-4xl">
           <p className="font-label-caps text-primary mb-4 tracking-[0.3em] uppercase">Nosso Portfólio</p>
           <h1 className="font-display-xl text-5xl md:text-7xl leading-tight mb-8">
@@ -103,16 +106,16 @@ export default function Projetos() {
       </section>
 
       {/* Filtros de Projetos Nítidos */}
-      <section className="px-margin-desktop mb-12">
-        <div className="flex flex-wrap gap-4 border-b border-outline-variant pb-6">
+      <section className="px-margin-mobile md:px-margin-desktop mb-16 relative z-10">
+        <div className="flex flex-wrap gap-3 md:gap-4 border-b border-outline-variant/30 pb-6">
           {['all', 'residencial', 'comercial', 'interiores'].map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`font-label-caps tracking-wider uppercase transition-colors ${
+              className={`px-5 py-2.5 font-label-caps text-[10px] md:text-xs tracking-[0.2em] uppercase transition-all duration-300 border ${
                 activeCategory === cat
-                  ? 'text-primary border-b border-primary pb-1'
-                  : 'text-secondary hover:text-primary'
+                  ? 'text-on-primary bg-primary border-primary font-bold shadow-[0_4px_20px_rgba(212,106,67,0.25)]'
+                  : 'text-secondary border-outline-variant/50 hover:border-primary/50 hover:text-primary bg-surface-container-low/40'
               }`}
             >
               {cat === 'all' ? 'Todos' : cat}
@@ -122,15 +125,15 @@ export default function Projetos() {
       </section>
 
       {/* Grade de Projetos */}
-      <section className="px-margin-desktop pb-section-gap">
+      <section className="px-margin-mobile md:px-margin-desktop pb-section-gap relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {filteredProjects.map((project, index) => (
             <div 
               key={project.id} 
               className="project-card group scroll-reveal block" 
-              style={{ transitionDelay: `${(index % 3) * 0.1}s` }}
+              style={{ transitionDelay: `${(index % 3) * 0.15}s` }}
             >
-              <div className="aspect-[3/4] overflow-hidden mb-6 relative">
+              <div className="aspect-[3/4] overflow-hidden mb-6 relative border border-outline-variant/30">
                 <img 
                   className="hover-img-zoom w-full h-full object-cover" 
                   alt={project.alt} 
@@ -138,12 +141,12 @@ export default function Projetos() {
                 />
                 <div className="absolute inset-0 bg-background/20 group-hover:bg-transparent transition-colors duration-700"></div>
               </div>
-              <div className="flex justify-between items-start">
+              <div className="flex justify-between items-start px-2">
                 <div>
-                  <span className="font-label-caps text-primary text-[10px] mb-2 block uppercase">{project.categoryLabel}</span>
-                  <h4 className="font-headline-lg text-body-lg font-bold group-hover:text-primary transition-colors">{project.title}</h4>
+                  <span className="font-label-caps text-primary text-[10px] mb-1.5 block uppercase tracking-[0.15em]">{project.categoryLabel}</span>
+                  <h4 className="font-serif text-lg md:text-xl font-bold group-hover:text-primary transition-colors duration-300">{project.title}</h4>
                 </div>
-                <span className="font-mono-label text-secondary">{project.year}</span>
+                <span className="font-mono-label text-secondary text-xs">{project.year}</span>
               </div>
             </div>
           ))}

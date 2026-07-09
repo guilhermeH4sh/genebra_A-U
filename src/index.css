@@ -13,7 +13,7 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Outfit', sans-serif;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -129,7 +129,7 @@ html.lenis, html.lenis body {
 }
 
 .cursor-label {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 10px;
   font-weight: 500;
   text-transform: uppercase;
@@ -254,4 +254,49 @@ html.lenis, html.lenis body {
 .magnetic-item {
   display: inline-block;
   will-change: transform;
+}
+
+/* Efeito de zoom suave em imagens de projetos */
+.hover-img-zoom {
+  transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.group:hover .hover-img-zoom {
+  transform: scale(1.06);
+}
+
+/* Animação de Scroll Reveal */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@layer utilities {
+  .font-display-xl {
+    font-family: 'Fraunces', serif !important;
+  }
+  .font-headline-lg {
+    font-family: 'Fraunces', serif !important;
+  }
+  .font-headline-lg-mobile {
+    font-family: 'Fraunces', serif !important;
+  }
+  .font-body-lg {
+    font-family: 'Cormorant Garamond', serif !important;
+  }
+  .font-body-md {
+    font-family: 'Outfit', sans-serif !important;
+  }
+  .font-label-caps {
+    font-family: 'Outfit', sans-serif !important;
+  }
+  .font-mono-label {
+    font-family: 'Outfit', sans-serif !important;
+  }
 }
