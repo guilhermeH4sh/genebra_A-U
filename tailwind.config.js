@@ -8,39 +8,39 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#E29A67", // Cobre sofisticado
-        "on-primary": "#0E0E0E",
-        background: "#0E0E0E", // Preto profundo uniforme
-        surface: "#161616", // Grafite escuro para blocos
-        "on-surface": "#F5F5F5", // Off-white para títulos/textos principais
-        "on-background": "#F5F5F5", // Off-white
-        secondary: "#A3A3A3", // Cinza médio para textos secundários
-        "on-surface-variant": "#A3A3A3", // Compatibilidade
-        "outline-variant": "#2A2A2A", // Borda nítida
-        "surface-container-low": "#121212", // Seções ligeiramente destacadas
-        "surface-container-lowest": "#060606" // Footer profundo
+        primary: "#D46A43", // Terracota arquitetônico
+        "on-primary": "#0A0A0A",
+        background: "#0A0A0A", // Preto profundo dominante
+        surface: "#121212", // Grafite escuro sutil
+        "on-surface": "#F4F2ED", // Off-white editorial
+        "on-background": "#F4F2ED", // Off-white editorial
+        secondary: "#8E8C87", // Cinza fosco quente
+        "on-surface-variant": "#8E8C87",
+        "outline-variant": "#1F1F1F", // Borda sutil
+        "surface-container-low": "#0F0F0F",
+        "surface-container-lowest": "#050505"
       },
       borderRadius: {
-        DEFAULT: "0.25rem",
-        lg: "0.5rem",
-        xl: "0.75rem",
+        DEFAULT: "0px", // Bordas duras e retas para visual arquitetônico editorial
+        lg: "0px",
+        xl: "0px",
         full: "9999px"
       },
       spacing: {
         gutter: "24px",
-        "section-gap": "120px",
+        "section-gap": "160px", // Mais espaço em branco para design editorial
         "margin-mobile": "24px",
         "margin-desktop": "80px",
         unit: "8px"
       },
       fontFamily: {
-        "body-lg": ["Montserrat", "sans-serif"],
-        "body-md": ["Montserrat", "sans-serif"],
-        "label-caps": ["Montserrat", "sans-serif"],
-        "headline-lg": ["Playfair Display", "serif"],
-        "display-xl": ["Playfair Display", "serif"],
-        "headline-lg-mobile": ["Playfair Display", "serif"],
-        "mono-label": ["Space Grotesk", "monospace"]
+        "body-lg": ["Inter", "sans-serif"],
+        "body-md": ["Inter", "sans-serif"],
+        "label-caps": ["Inter", "sans-serif"],
+        "headline-lg": ["Fraunces", "serif"],
+        "display-xl": ["Fraunces", "serif"],
+        "headline-lg-mobile": ["Fraunces", "serif"],
+        "mono-label": ["Inter", "sans-serif"]
       },
       fontSize: {
         "body-lg": ["18px", { lineHeight: "32px", letterSpacing: "0.01em", fontWeight: "400" }],

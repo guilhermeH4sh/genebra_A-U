@@ -3,86 +3,81 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-background: #0A0A0A;
+    --color-foreground: #F4F2ED;
+    --color-primary: #D46A43; /* Terracota arquitetônico */
+    --color-secondary: #8E8C87; /* Cinza fosco quente */
+  }
+
   body {
-    @apply bg-background text-on-background font-body-md selection:bg-primary selection:text-on-primary;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: 'Inter', sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Fraunces', serif;
   }
 }
 
+/* Lenis Smooth Scroll Setup */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis-smooth [data-lenis-prevent] {
+  overflow: clip;
+}
+
+.lenis-target {
+  scroll-behavior: auto !important;
+}
+
+.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Textura de Grão Editorial */
 .noise-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  content: "";
   background-image: url(/assets/images/noise.png);
-  opacity: 0.02;
+  opacity: 0.025;
   pointer-events: none;
   z-index: 9999;
 }
 
-.material-symbols-outlined {
-  font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+/* Máscaras de Texto para SplitType Revelations */
+.split-line {
+  overflow: hidden;
+  display: block;
 }
 
-/* Scroll reveal e transições */
-.scroll-reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+.split-char {
+  display: inline-block;
+  transform: translateY(105%);
+  will-change: transform;
 }
 
-.scroll-reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+.split-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
 }
 
-.hover-img-zoom {
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.project-card:hover .hover-img-zoom {
-  transform: scale(1.08);
-}
-
-::-webkit-scrollbar {
-  width: 4px;
-}
-
-::-webkit-scrollbar-track {
-  background: #0E0E0E;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #2A2A2A;
-}
-
-/* Animações de entrada do Hero */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 1s ease-out forwards;
-}
-
-.animate-fadeInUp {
-  animation: fadeInUp 1.2s ease-out forwards;
-}
-
-/* CAD Cursor Customizado */
+/* Cursor Customizado Circular */
 @media (pointer: fine) {
   .custom-cursor-active,
   .custom-cursor-active * {
@@ -90,118 +85,173 @@
   }
 }
 
-.cad-cursor-follower {
+.circular-cursor {
   position: fixed;
   top: 0;
   left: 0;
-  width: 24px;
-  height: 24px;
-  border: 1px solid rgba(226, 154, 103, 0.4);
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-foreground);
   border-radius: 50%;
   pointer-events: none;
   z-index: 10000;
   transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s, border-color 0.2s, background-color 0.2s;
+  mix-blend-mode: difference;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              height 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.circular-cursor.hovering-link {
+  width: 24px;
+  height: 24px;
+  background-color: var(--color-primary);
+  mix-blend-mode: normal;
+}
+
+.circular-cursor.hovering-project {
+  width: 90px;
+  height: 90px;
+  background-color: var(--color-foreground);
   mix-blend-mode: difference;
 }
 
-.cad-cursor-follower.hovering {
-  width: 48px;
-  height: 48px;
-  border-color: rgba(226, 154, 103, 0.8);
-  background-color: rgba(226, 154, 103, 0.05);
+.circular-cursor.hovering-scroll {
+  width: 70px;
+  height: 70px;
+  background-color: transparent;
+  border: 1px solid var(--color-foreground);
+  mix-blend-mode: difference;
 }
 
-.cad-cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 4px;
-  background-color: #E29A67;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 10001;
-  transform: translate(-50%, -50%);
-}
-
-.cad-cursor-coords {
-  position: fixed;
-  pointer-events: none;
-  font-family: 'Space Grotesk', monospace;
-  font-size: 8px;
-  color: rgba(226, 154, 103, 0.6);
-  z-index: 10002;
-  margin-left: 20px;
-  margin-top: 10px;
+.cursor-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-background);
+  opacity: 0;
   white-space: nowrap;
+  transition: opacity 0.2s ease;
 }
 
-/* Linhas guias do Cursor CAD */
-.cad-cursor-axis-x, .cad-cursor-axis-y {
-  position: fixed;
-  background-color: rgba(226, 154, 103, 0.04);
-  pointer-events: none;
-  z-index: 9999;
-}
-.cad-cursor-axis-x {
-  top: 0;
-  height: 100vh;
-  width: 1px;
-}
-.cad-cursor-axis-y {
-  left: 0;
-  width: 100vw;
-  height: 1px;
+.circular-cursor.hovering-project .cursor-label,
+.circular-cursor.hovering-scroll .cursor-label {
+  opacity: 1;
 }
 
-/* Malha técnica de blueprint */
-.blueprint-grid-bg {
-  background-size: 40px 40px;
-  background-image: 
-    linear-gradient(to right, rgba(226, 154, 103, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(226, 154, 103, 0.02) 1px, transparent 1px);
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
+.circular-cursor.hovering-scroll .cursor-label {
+  color: var(--color-foreground);
 }
 
-.blueprint-grid-bg-fine {
-  background-size: 8px 8px;
-  background-image: 
-    linear-gradient(to right, rgba(226, 154, 103, 0.008) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(226, 154, 103, 0.008) 1px, transparent 1px);
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
+/* Cursor Follower Image Preview (Projetos Hover) */
+.cursor-image-preview {
+  display: none;
 }
 
-@keyframes drawStroke {
-  to {
-    stroke-dashoffset: 0;
+@media (min-width: 768px) {
+  .cursor-image-preview {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 380px;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0;
+    overflow: hidden;
+    will-change: transform, opacity;
+    border: 1px solid rgba(244, 242, 237, 0.1);
   }
 }
 
-.animate-draw {
-  stroke-dasharray: 1200;
-  stroke-dashoffset: 1200;
-  animation: drawStroke 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.cursor-image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* Vidro técnico/Glassmorphism */
-.technical-card {
-  background: rgba(22, 22, 22, 0.7);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(42, 42, 42, 0.6);
+/* Preloader Panels / Cortina */
+.preloader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #050505;
+  z-index: 10100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.technical-card:hover {
-  border-color: rgba(226, 154, 103, 0.3);
+.preloader-curtain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-primary);
+  z-index: 10099;
+  transform: translateY(100%);
 }
 
-/* Blueprint Look para imagens */
-.blueprint-image-layer {
-  filter: brightness(0.5) contrast(1.5) sepia(1) hue-rotate(195deg) saturate(10) brightness(0.7);
-  opacity: 0.9;
+/* Blueprint Grid sutil (segundo plano de reforço) */
+.blueprint-grid-bg {
+  background-size: 60px 60px;
+  background-image: 
+    linear-gradient(to right, rgba(142, 140, 135, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(142, 140, 135, 0.02) 1px, transparent 1px);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* Custom Grid e Layout Utilities */
+.text-huge {
+  font-size: clamp(3rem, 7.5vw, 8.5rem);
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+}
+
+.text-huge-sub {
+  font-size: clamp(1.8rem, 4vw, 4.5rem);
+  letter-spacing: -0.02em;
+  line-height: 1.0;
+}
+
+/* Botão Magnético Interno */
+.magnetic-wrap {
+  display: inline-block;
+  position: relative;
+}
+
+.magnetic-item {
+  display: inline-block;
+  will-change: transform;
+}
