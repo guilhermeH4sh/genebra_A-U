@@ -120,7 +120,7 @@ export default function Processo() {
         <div className="max-w-4xl">
           <p className="processo-header-subtitle font-label-caps text-primary mb-4 tracking-[0.3em] uppercase opacity-0">Metodologia</p>
           <h1 className="processo-header-title font-display-xl text-5xl md:text-7xl leading-tight mb-8 opacity-0">
-            A jornada do vazio<br/><span className="italic font-normal text-secondary">ao espaço habitado</span>
+            A jornada do vazio<br/><span className="font-normal text-secondary">ao espaço habitado</span>
           </h1>
         </div>
       </section>

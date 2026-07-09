@@ -37,9 +37,9 @@ export default {
         "body-lg": ["Inter", "sans-serif"],
         "body-md": ["Inter", "sans-serif"],
         "label-caps": ["Inter", "sans-serif"],
-        "headline-lg": ["Fraunces", "serif"],
-        "display-xl": ["Fraunces", "serif"],
-        "headline-lg-mobile": ["Fraunces", "serif"],
+        "headline-lg": ["Inter", "sans-serif"],
+        "display-xl": ["Inter", "sans-serif"],
+        "headline-lg-mobile": ["Inter", "sans-serif"],
         "mono-label": ["Inter", "sans-serif"]
       },
       fontSize: {

@@ -40,7 +40,7 @@ export default function Contato() {
         <div className="max-w-4xl">
           <p className="contato-header-subtitle font-label-caps text-primary mb-4 tracking-[0.3em] uppercase opacity-0">Inicie uma Conversa</p>
           <h1 className="contato-header-title font-display-xl text-4xl md:text-7xl leading-tight mb-8 opacity-0">
-            Pronto para dar forma<br/><span className="italic font-normal text-secondary">ao seu novo espaço?</span>
+            Pronto para dar forma<br/><span className="font-normal text-secondary">ao seu novo espaço?</span>
           </h1>
         </div>
       </section>

@@ -83,51 +83,31 @@ const SERVICES = [
 
 // 1. SEÇÃO HERO - MEMOIZADA PARA EVITAR COMPORTAMENTO INESPERADO DO SPLITTYPE COM RE-RENDERS
 const HeroSection = React.memo(() => {
-  const heroTitleRef = useRef(null)
-  const heroSubtitleRef = useRef(null)
   const heroImgContainerRef = useRef(null)
   const heroImgRef = useRef(null)
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion) return
 
-    if (heroTitleRef.current && !prefersReducedMotion) {
-      const split = new SplitType(heroTitleRef.current, { types: 'chars,words' })
-      
-      gsap.fromTo(split.chars,
-        { y: '105%', opacity: 0 },
-        {
-          y: '0%',
-          opacity: 1,
-          stagger: 0.02,
-          duration: 1.4,
-          ease: 'power4.out',
-          delay: 0.1 // Sincronizado com a abertura final da cortina do preloader
-        }
-      )
-    }
+    const heroImg = heroImgRef.current
+    if (!heroImg) return
 
-    if (heroSubtitleRef.current) {
-      gsap.fromTo(heroSubtitleRef.current,
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out', delay: 0.6 }
-      )
-    }
+    // 1. Apenas a animação no scroll (Parallax)
+    const parallaxTrigger = gsap.to(heroImg, {
+      yPercent: 12,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: heroImgContainerRef.current,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+      }
+    })
 
-    if (heroImgRef.current && !prefersReducedMotion) {
-      gsap.fromTo(heroImgRef.current,
-        { yPercent: -10 },
-        {
-          yPercent: 10,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: heroImgContainerRef.current,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true
-          }
-        }
-      )
+    return () => {
+      parallaxTrigger.scrollTrigger?.kill()
+      parallaxTrigger.kill()
     }
   }, [])
 
@@ -136,18 +116,15 @@ const HeroSection = React.memo(() => {
       <div>{/* Spacer */}</div>
 
       <div className="max-w-[90%] md:max-w-[80%] z-10">
-        <div className="overflow-hidden">
+        <div>
           <h1 
-            ref={heroTitleRef} 
             className="text-huge font-bold uppercase text-on-background select-none leading-none"
           >
             Arquitetura que<br />escuta o espaço.
           </h1>
         </div>
         <p 
-          ref={heroSubtitleRef} 
           className="mt-8 font-body-lg text-secondary text-lg md:text-xl max-w-xl leading-relaxed"
-          style={{ opacity: 0 }}
         >
           Projetamos silêncio, proporção e luz natural. Uma abordagem editorial focada no essencial do morar contemporâneo.
         </p>
@@ -165,7 +142,7 @@ const HeroSection = React.memo(() => {
 
       {/* Scroll Indicator */}
       <div 
-        className="flex items-center gap-4 select-none cursor-pointer"
+        className="hero-scroll-indicator flex items-center gap-4 select-none cursor-pointer"
         data-cursor="scroll"
         data-cursor-label="GO DOWN"
         onClick={() => {
@@ -465,16 +442,16 @@ export default function Home() {
       gsap.to(preview, {
         opacity: 1,
         scale: 1,
-        duration: 0.45,
-        ease: 'power3.out',
+        duration: 0.2, // Acelera o fade-in do preview
+        ease: 'power1.out',
         overwrite: 'auto'
       })
     } else {
       gsap.to(preview, {
         opacity: 0,
         scale: 0.8,
-        duration: 0.3,
-        ease: 'power3.in',
+        duration: 0.15, // Acelera o fade-out do preview
+        ease: 'power1.in',
         overwrite: 'auto'
       })
     }
@@ -489,8 +466,8 @@ export default function Home() {
       gsap.to(previewRef.current, {
         x: e.clientX,
         y: e.clientY,
-        duration: 0.35,
-        ease: 'power3.out',
+        duration: 0.12, // Reduz o lag do seguidor de 0.35s para 0.12s
+        ease: 'power1.out',
         overwrite: 'auto'
       })
     }

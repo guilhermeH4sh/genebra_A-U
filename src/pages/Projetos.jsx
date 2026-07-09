@@ -97,7 +97,7 @@ export default function Projetos() {
         <div className="max-w-4xl">
           <p className="font-label-caps text-primary mb-4 tracking-[0.3em] uppercase">Nosso Portfólio</p>
           <h1 className="font-display-xl text-5xl md:text-7xl leading-tight mb-8">
-            Marcas no espaço,<br/><span class="italic font-normal text-secondary">esculpidas no tempo</span>
+            Marcas no espaço,<br/><span className="font-normal text-secondary">esculpidas no tempo</span>
           </h1>
         </div>
       </section>

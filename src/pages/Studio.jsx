@@ -114,7 +114,7 @@ export default function Studio() {
         <div className="max-w-4xl">
           <p className="manifesto-subtitle font-label-caps text-primary mb-4 tracking-[0.3em] uppercase opacity-0">Quem Somos</p>
           <h1 className="manifesto-title font-display-xl text-5xl md:text-7xl leading-tight mb-8 opacity-0">
-            Espaços pautados pela<br/><span className="italic font-normal text-secondary">clareza e verdade material</span>
+            Espaços pautados pela<br/><span className="font-normal text-secondary">clareza e verdade material</span>
           </h1>
         </div>
       </section>

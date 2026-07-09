@@ -1,97 +1,60 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import gsap from 'gsap'
 
 export default function Preloader({ onReveal, onComplete }) {
-  const [percent, setPercent] = useState(0)
-
   useEffect(() => {
-    // Verificar se o usuário prefere movimento reduzido
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     if (prefersReducedMotion) {
-      setPercent(100)
       if (onReveal) onReveal()
       onComplete()
       return
     }
 
     const tl = gsap.timeline({
-      onComplete: () => {
-        // Revelar o site de fundo antes da cortina subir
-        if (onReveal) onReveal()
-
-        // Cortina subindo ao terminar
-        const curtainTl = gsap.timeline({
-          onComplete: onComplete
-        })
-
-        // Wipe animation
-        curtainTl.to('.preloader-overlay', {
-          y: '-100%',
-          duration: 1.0,
-          ease: 'power4.inOut'
-        })
-      }
+      onComplete: onComplete
     })
 
-    // Animação de entrada dos caracteres
-    tl.fromTo('.preloader-char',
-      { y: '100%', opacity: 0 },
-      { y: '0%', opacity: 1, stagger: 0.08, duration: 1.0, ease: 'power4.out' }
-    )
-
-    // Contador discreto 0-100%
-    const counterObj = { value: 0 }
-    tl.to(counterObj, {
-      value: 100,
-      duration: 3.5, // Aumentado de 2.0 para 3.5 para desacelerar o contador
-      ease: 'power3.inOut',
-      onUpdate: () => {
-        setPercent(Math.floor(counterObj.value))
-      }
-    }, '-=0.5')
-
-    // Tempo de permanência estático (hold) em 100% antes de iniciar a transição
+    // 1. Silêncio / Hold inicial (1.2 segundos para assentar a marca)
     tl.to({}, { duration: 1.2 })
 
-    // Sumir com as letras antes de subir a cortina
-    tl.to('.preloader-char', {
-      y: '-100%',
-      opacity: 0,
-      stagger: 0.04,
-      duration: 0.8, // Aumentado de 0.6 para 0.8 para saída mais dramática
-      ease: 'power4.in'
+    // 2. Montar o site em segundo plano no início do fade-out do loader
+    tl.to({}, {
+      duration: 0.1,
+      onComplete: () => {
+        if (onReveal) onReveal()
+      }
     })
+
+    // 3. Fade out lento da marca "GENEBRA"
+    tl.to('.preloader-brand', {
+      opacity: 0,
+      duration: 1.2,
+      ease: 'power2.inOut'
+    })
+
+    // 4. Fade out ultra lento da tela preta do preloader (2.0 segundos)
+    tl.to('.preloader-overlay', {
+      opacity: 0,
+      duration: 2.0,
+      ease: 'power2.inOut'
+    }, '-=0.8') // Overlap com o sumiço do nome para suavidade máxima
 
     return () => {
       tl.kill()
     }
-  }, [onComplete])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
-    <div className="preloader-overlay">
-      {/* Container de Letras com Overflow Hidden */}
-      <div className="overflow-hidden flex select-none">
-        {"GENEBRA".split("").map((char, index) => (
-          <span
-            key={index}
-            className="preloader-char inline-block font-display-xl text-6xl md:text-8xl font-bold tracking-tight text-on-background"
-            style={{ display: 'inline-block' }}
-          >
-            {char}
-          </span>
-        ))}
-      </div>
-
-      {/* Contador Discreto no Canto */}
-      <div className="absolute bottom-12 right-12 md:right-20 md:bottom-20 font-mono-label text-secondary text-sm tracking-widest select-none">
-        {String(percent).padStart(3, '0')}%
-      </div>
-      
-      {/* Elemento decorativo técnico minimalista */}
-      <div className="absolute bottom-12 left-12 md:left-20 md:bottom-20 font-mono-label text-xs text-primary/45 tracking-wider select-none">
-        STUDIO DE ARQUITETURA
-      </div>
+    <div 
+      className="preloader-overlay flex items-center justify-center" 
+      style={{ backgroundColor: '#0A0A0A', zIndex: 10100 }}
+    >
+      {/* Nome da Marca com tipografia editorial limpa e alto espaçamento */}
+      <h2 className="preloader-brand font-display-xl text-3xl md:text-5xl font-bold tracking-[0.4em] text-on-background uppercase select-none">
+        GENEBRA
+      </h2>
     </div>
   )
 }

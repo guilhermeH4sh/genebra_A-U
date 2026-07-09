@@ -28,9 +28,9 @@ export default function CustomCursor() {
     const cursor = cursorRef.current
     if (!cursor) return
 
-    // Configurar GSAP quickTo para mover o cursor com altíssima performance
-    const xTo = gsap.quickTo(cursor, 'x', { duration: 0.25, ease: 'power3.out' })
-    const yTo = gsap.quickTo(cursor, 'y', { duration: 0.25, ease: 'power3.out' })
+    // Configurar GSAP quickTo para mover o cursor de forma instantânea e leve
+    const xTo = gsap.quickTo(cursor, 'x', { duration: 0.05, ease: 'power1.out' })
+    const yTo = gsap.quickTo(cursor, 'y', { duration: 0.05, ease: 'power1.out' })
 
     // Estado inicial de posicionamento para evitar "pulo"
     gsap.set(cursor, { xPercent: -50, yPercent: -50 })
