@@ -123,7 +123,7 @@ export default function Studio() {
       </section>
 
       {/* Nossa História */}
-      <section className="fundacao-section py-section-gap px-margin-mobile md:px-margin-desktop grid grid-cols-1 lg:grid-cols-12 gap-gutter relative z-10">
+      <section className="fundacao-section py-20 md:py-section-gap px-margin-mobile md:px-margin-desktop grid grid-cols-1 lg:grid-cols-12 gap-gutter relative z-10">
         <div className="fundacao-left lg:col-span-5 opacity-0">
           <h2 className="font-label-caps text-primary tracking-[0.2em] mb-6 uppercase">A Fundação</h2>
           <h3 className="font-display-xl text-4xl mb-8">Unindo a precisão técnica e a liberdade poética.</h3>
@@ -139,7 +139,7 @@ export default function Studio() {
       </section>
 
       {/* Filosofia & Princípios em Grafite */}
-      <section className="valores-section bg-surface-container-low/40 backdrop-blur-md py-section-gap px-margin-mobile md:px-margin-desktop border-y border-outline-variant/30 relative z-10">
+      <section className="valores-section bg-surface-container-low/40 backdrop-blur-md py-20 md:py-section-gap px-margin-mobile md:px-margin-desktop border-y border-outline-variant/30 relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="valores-title text-center mb-20 opacity-0">
             <h2 className="font-label-caps text-primary tracking-[0.3em] mb-4 uppercase">Valores Primordiais</h2>
@@ -170,42 +170,42 @@ export default function Studio() {
       </section>
 
       {/* Prêmios & Reconhecimento */}
-      <section className="py-section-gap px-margin-mobile md:px-margin-desktop relative z-10">
+      <section className="py-20 md:py-section-gap px-margin-mobile md:px-margin-desktop relative z-10">
         <div className="max-w-5xl mx-auto">
           <h2 className="font-label-caps text-primary tracking-[0.2em] mb-12 text-center uppercase">Reconhecimento</h2>
           <div className="premios-list divide-y divide-outline-variant/20 border-y border-outline-variant/20">
             
-            <div className="premio-row group py-6 flex justify-between items-center opacity-0 hover:border-primary/30 transition-colors duration-300">
-              <div className="flex items-center gap-6">
-                <span className="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform duration-300">trophy</span>
+            <div className="premio-row group py-6 flex flex-col sm:flex-row gap-4 sm:gap-0 justify-between items-start sm:items-center opacity-0 hover:border-primary/30 transition-colors duration-300">
+              <div className="flex items-start gap-4 sm:gap-6">
+                <span className="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform duration-300 shrink-0">trophy</span>
                 <div>
-                  <h4 className="font-headline-lg text-xl text-on-background group-hover:text-primary transition-colors duration-300">Prêmio de Arquitetura Contemporânea</h4>
-                  <p className="text-sm text-secondary">Categoria Edifício Residencial — Casa Brise</p>
+                  <h4 className="font-headline-lg text-lg md:text-xl text-on-background group-hover:text-primary transition-colors duration-300">Prêmio de Arquitetura Contemporânea</h4>
+                  <p className="text-xs md:text-sm text-secondary">Categoria Edifício Residencial — Casa Brise</p>
                 </div>
               </div>
-              <span className="font-mono-label text-primary font-bold">2025</span>
+              <span className="font-mono-label text-primary font-bold sm:self-center self-start pl-[44px] sm:pl-0">2025</span>
             </div>
 
-            <div className="premio-row group py-6 flex justify-between items-center opacity-0 hover:border-primary/30 transition-colors duration-300">
-              <div className="flex items-center gap-6">
-                <span className="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform duration-300">workspace_premium</span>
+            <div className="premio-row group py-6 flex flex-col sm:flex-row gap-4 sm:gap-0 justify-between items-start sm:items-center opacity-0 hover:border-primary/30 transition-colors duration-300">
+              <div className="flex items-start gap-4 sm:gap-6">
+                <span className="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform duration-300 shrink-0">workspace_premium</span>
                 <div>
-                  <h4 className="font-headline-lg text-xl text-on-background group-hover:text-primary transition-colors duration-300">Bienal de Arquitetura Minimalista</h4>
-                  <p className="text-sm text-secondary">Destaque em Design de Interiores — Loft Minimalista</p>
+                  <h4 className="font-headline-lg text-lg md:text-xl text-on-background group-hover:text-primary transition-colors duration-300">Bienal de Arquitetura Minimalista</h4>
+                  <p className="text-xs md:text-sm text-secondary">Destaque em Design de Interiores — Loft Minimalista</p>
                 </div>
               </div>
-              <span className="font-mono-label text-primary font-bold">2024</span>
+              <span className="font-mono-label text-primary font-bold sm:self-center self-start pl-[44px] sm:pl-0">2024</span>
             </div>
 
-            <div className="premio-row group py-6 flex justify-between items-center opacity-0 hover:border-primary/30 transition-colors duration-300">
-              <div className="flex items-center gap-6">
-                <span className="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform duration-300">military_tech</span>
+            <div className="premio-row group py-6 flex flex-col sm:flex-row gap-4 sm:gap-0 justify-between items-start sm:items-center opacity-0 hover:border-primary/30 transition-colors duration-300">
+              <div className="flex items-start gap-4 sm:gap-6">
+                <span className="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform duration-300 shrink-0">military_tech</span>
                 <div>
-                  <h4 className="font-headline-lg text-xl text-on-background group-hover:text-primary transition-colors duration-300">Prêmio Green Design Internacional</h4>
-                  <p className="text-sm text-secondary">Sustentabilidade e Estruturas de Vanguarda — Monolith HQ</p>
+                  <h4 className="font-headline-lg text-lg md:text-xl text-on-background group-hover:text-primary transition-colors duration-300">Prêmio Green Design Internacional</h4>
+                  <p className="text-xs md:text-sm text-secondary">Sustentabilidade e Estruturas de Vanguarda — Monolith HQ</p>
                 </div>
               </div>
-              <span className="font-mono-label text-primary font-bold">2023</span>
+              <span className="font-mono-label text-primary font-bold sm:self-center self-start pl-[44px] sm:pl-0">2023</span>
             </div>
 
           </div>

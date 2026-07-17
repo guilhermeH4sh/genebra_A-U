@@ -131,7 +131,7 @@ const HeroSection = React.memo(() => {
       </div>
 
       {/* Parallax Image Hero */}
-      <div className="absolute top-0 right-0 w-[45%] h-full opacity-20 md:opacity-35 pointer-events-none select-none overflow-hidden" ref={heroImgContainerRef}>
+      <div className="absolute top-0 right-0 w-[45%] h-full opacity-10 md:opacity-35 pointer-events-none select-none overflow-hidden" ref={heroImgContainerRef}>
         <img 
           ref={heroImgRef}
           src="assets/images/residencia_cume.png" 
@@ -225,7 +225,7 @@ const ManifestoSection = React.memo(() => {
   }, [])
 
   return (
-    <section id="manifesto" className="px-margin-mobile md:px-margin-desktop py-section-gap grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-outline-variant relative">
+    <section id="manifesto" className="px-margin-mobile md:px-margin-desktop py-20 md:py-section-gap grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-outline-variant relative">
       <div className="lg:col-span-4">
         <span className="font-mono-label text-xs text-primary uppercase tracking-[0.25em]">01 // MANIFESTO</span>
       </div>
@@ -278,7 +278,7 @@ const QuoteSection = React.memo(() => {
   }, [])
 
   return (
-    <section className="bg-[#050505] py-section-gap px-margin-mobile md:px-margin-desktop border-t border-outline-variant flex flex-col items-center">
+    <section className="bg-[#050505] py-20 md:py-section-gap px-margin-mobile md:px-margin-desktop border-t border-outline-variant flex flex-col items-center">
       <div className="depoimento-container opacity-0 max-w-4xl text-center space-y-10">
         <span className="material-symbols-outlined text-primary text-5xl select-none">
           format_quote
@@ -600,7 +600,7 @@ export default function Home() {
       </section>
 
       {/* 4. SEÇÃO SERVIÇOS (ACORDEÃO MINIMALISTA) */}
-      <section id="servicos" className="px-margin-mobile md:px-margin-desktop py-section-gap grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-outline-variant">
+      <section id="servicos" className="px-margin-mobile md:px-margin-desktop py-20 md:py-section-gap grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-outline-variant">
         <div className="lg:col-span-4">
           <span className="font-mono-label text-xs text-primary uppercase tracking-[0.25em]">03 // SERVIÇOS</span>
           <h2 className="font-display-xl text-3xl md:text-4xl uppercase font-bold text-on-background mt-4 leading-none">
@@ -662,7 +662,7 @@ export default function Home() {
       <QuoteSection />
 
       {/* 6. SEÇÃO CTA FINAL / CONTATO */}
-      <section id="contato" className="cta-section px-margin-mobile md:px-margin-desktop py-section-gap flex flex-col justify-between min-h-[80vh] relative">
+      <section id="contato" className="cta-section px-margin-mobile md:px-margin-desktop py-20 md:py-section-gap flex flex-col justify-between min-h-[80vh] relative">
         <div className="max-w-4xl space-y-8 z-10">
           <span className="font-mono-label text-xs text-primary uppercase tracking-[0.25em]">04 // CONTATO</span>
           <h2 className="cta-title-reveal text-huge font-bold uppercase text-on-background leading-none select-none">

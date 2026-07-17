@@ -296,7 +296,7 @@ export default function BlueprintCanvas({ phase }) {
   }
 
   return (
-    <div className="w-full aspect-square md:w-[400px] md:h-[400px] bg-[#0E0E0E] border border-outline-variant p-6 flex items-center justify-center relative overflow-hidden technical-card rounded shadow-xl">
+    <div className="w-full max-w-[400px] aspect-square mx-auto md:w-[400px] md:h-[400px] bg-[#0E0E0E] border border-outline-variant p-6 flex items-center justify-center relative overflow-hidden technical-card rounded shadow-xl">
       <div className="absolute top-3 left-4 font-mono text-[8px] text-secondary tracking-widest flex items-center gap-2">
         <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
         <span>HUD_BOARD // LIVE_DRAFT</span>

@@ -129,7 +129,7 @@ export default function Processo() {
       </section>
 
       {/* Prancha Interativa de Metodologia */}
-      <section className="metodologia-board py-section-gap px-margin-mobile md:px-margin-desktop opacity-0 relative z-10">
+      <section className="metodologia-board py-20 md:py-section-gap px-margin-mobile md:px-margin-desktop opacity-0 relative z-10">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
           
           {/* Coluna Esquerda: Timeline e Detalhes da Fase */}
