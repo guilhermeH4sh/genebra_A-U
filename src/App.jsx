@@ -7,7 +7,6 @@ import Projetos from './pages/Projetos.jsx'
 import Studio from './pages/Studio.jsx'
 import Processo from './pages/Processo.jsx'
 import Contato from './pages/Contato.jsx'
-import CustomCursor from './components/CustomCursor.jsx'
 import Lenis from 'lenis'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -69,8 +68,6 @@ export default function App() {
   return (
     <Router>
       <ScrollToTop />
-      
-      <CustomCursor />
       
       {/* O site monta e carrega de forma instantânea sem telas de preloader */}
       <div 
