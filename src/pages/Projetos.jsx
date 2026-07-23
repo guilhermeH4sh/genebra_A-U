@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import SEO from '../components/SEO.jsx'
 
 const PROJETOS_DATA = [
   {
@@ -8,7 +9,7 @@ const PROJETOS_DATA = [
     categoryLabel: "Residencial",
     year: "2023",
     img: "assets/images/casa_brise.png",
-    alt: "Fotografia de villa minimalista de concreto, Casa Brise."
+    alt: "Fotografia da Casa Brise, villa residencial minimalista em concreto aparente e painéis de madeira."
   },
   {
     id: 2,
@@ -17,7 +18,7 @@ const PROJETOS_DATA = [
     categoryLabel: "Comercial",
     year: "2022",
     img: "assets/images/monolith_hq.png",
-    alt: "Sede comercial minimalista, Monolith HQ."
+    alt: "Fachada monolítica escura do edifício comercial Monolith HQ com arquitetura corporativa autoral."
   },
   {
     id: 3,
@@ -26,7 +27,7 @@ const PROJETOS_DATA = [
     categoryLabel: "Interiores",
     year: "2024",
     img: "assets/images/minimal_loft.png",
-    alt: "Design de interiores do Minimal Loft."
+    alt: "Design de interiores contemporâneo em loft integrado com acabamento em concreto e madeira nobre."
   },
   {
     id: 4,
@@ -35,7 +36,7 @@ const PROJETOS_DATA = [
     categoryLabel: "Residencial",
     year: "2024",
     img: "assets/images/residencia_cume.png",
-    alt: "Residência Cume"
+    alt: "Residência Cume, projeto residencial de alto padrão perfeitamente integrado ao topo da montanha."
   },
   {
     id: 5,
@@ -44,7 +45,7 @@ const PROJETOS_DATA = [
     categoryLabel: "Comercial",
     year: "2025",
     img: "assets/images/pavilhao_sombra.png",
-    alt: "Pavilhão Sombra"
+    alt: "Estrutura contemporânea em vidro e perfis metálicos do Pavilhão Sombra."
   },
   {
     id: 6,
@@ -53,7 +54,7 @@ const PROJETOS_DATA = [
     categoryLabel: "Interiores",
     year: "2023",
     img: "assets/images/galeria_origami.png",
-    alt: "Galeria Origami"
+    alt: "Projeto de arquitetura de interiores com iluminação cênica e forro esculpido em forma de origami."
   }
 ]
 
@@ -92,6 +93,12 @@ export default function Projetos() {
 
   return (
     <main className="pt-32 min-h-screen relative overflow-hidden">
+      <SEO 
+        title="Projetos | Genebra Arquitetura Editorial" 
+        description="Explore o portfólio autoral de projetos residenciais, comerciais e de interiores desenvolvidos pelo estúdio Genebra em São Paulo."
+        path="/#/projetos"
+        image="assets/images/casa_brise.png"
+      />
       {/* Background blueprint grid */}
       <div className="blueprint-grid-bg opacity-30 pointer-events-none"></div>
 

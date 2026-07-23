@@ -39,7 +39,8 @@ export default function Header() {
 
   return (
     <>
-      <nav className="fixed top-0 w-full z-[100] bg-background/80 backdrop-blur-lg border-b border-outline-variant/30 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-6">
+      <header className="fixed top-0 w-full z-[100] bg-background/80 backdrop-blur-lg border-b border-outline-variant/30 px-margin-mobile md:px-margin-desktop py-6">
+        <nav className="w-full flex justify-between items-center" aria-label="Navegação principal">
         
         {/* Logo com fonte Serifada Editorial */}
         <Link 
@@ -122,6 +123,7 @@ export default function Header() {
           />
         </button>
       </nav>
+    </header>
 
       {/* Menu Overlay Mobile */}
       <div 

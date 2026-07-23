@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import BlueprintCanvas from '../components/BlueprintCanvas.jsx'
+import SEO from '../components/SEO.jsx'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -115,6 +116,12 @@ export default function Processo() {
 
   return (
     <main ref={mainRef} className="pt-32 min-h-screen relative overflow-hidden">
+      <SEO 
+        title="Processo & Metodologia | Genebra Arquitetura Editorial" 
+        description="Conheça as 5 fases da metodologia de projeto do estúdio Genebra: Diálogo, Conceito, Projeto Executivo, Acompanhamento de Obra e Entrega."
+        path="/#/processo"
+        image="assets/images/casa_brise.png"
+      />
       {/* Background blueprint grid */}
       <div className="blueprint-grid-bg opacity-30 pointer-events-none"></div>
 

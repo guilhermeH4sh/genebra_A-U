@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import SEO from '../components/SEO.jsx'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -35,6 +36,12 @@ export default function Contato() {
 
   return (
     <main ref={mainRef} className="pt-32 min-h-[85vh] flex flex-col justify-center relative overflow-hidden">
+      <SEO 
+        title="Contato | Genebra Arquitetura Editorial" 
+        description="Entre em contato com o estúdio Genebra. Vamos conversar sobre o seu novo projeto residencial ou comercial de alto padrão."
+        path="/#/contato"
+        image="assets/images/casa_brise.png"
+      />
       {/* Background blueprint grid */}
       <div className="blueprint-grid-bg opacity-30 pointer-events-none"></div>
 

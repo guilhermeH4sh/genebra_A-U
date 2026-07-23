@@ -1,0 +1,17 @@
+{
+  "name": "Genebra | Arquitetura Editorial",
+  "short_name": "Genebra",
+  "description": "Estúdio de arquitetura autoral focado no design de alto padrão e minimalismo espacial.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0A0A",
+  "theme_color": "#0A0A0A",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

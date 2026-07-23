@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import SEO from '../components/SEO.jsx'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -109,6 +110,12 @@ export default function Studio() {
 
   return (
     <main ref={mainRef} className="pt-32 min-h-screen relative overflow-hidden">
+      <SEO 
+        title="Estúdio | Genebra Arquitetura Editorial" 
+        description="Conheça a história, filosofia de essência e princípios fundamentais do estúdio de arquitetura Genebra em São Paulo."
+        path="/#/studio"
+        image="assets/images/casa_brise.png"
+      />
       {/* Background blueprint grid */}
       <div className="blueprint-grid-bg opacity-30 pointer-events-none"></div>
 

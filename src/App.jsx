@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
+import CustomCursor from './components/CustomCursor.jsx'
 import Home from './pages/Home.jsx'
 import Projetos from './pages/Projetos.jsx'
 import Studio from './pages/Studio.jsx'
@@ -78,6 +79,9 @@ export default function App() {
         
         {/* Linhas guias de blueprint de segundo plano */}
         <div className="blueprint-grid-bg opacity-30"></div>
+        
+        {/* Cursor interativo customizado */}
+        <CustomCursor />
         
         <Header />
         

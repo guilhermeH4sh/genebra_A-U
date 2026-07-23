@@ -4,6 +4,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SplitType from 'split-type'
 import MagneticButton from '../components/MagneticButton.jsx'
+import SEO from '../components/SEO.jsx'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -475,6 +476,12 @@ export default function Home() {
 
   return (
     <main ref={mainRef} className="bg-background" onMouseMove={handleMouseMove}>
+      <SEO 
+        title="Genebra | Arquitetura Editorial & Design Minimalista" 
+        description="Estúdio autoral de arquitetura contemporânea e design de interiores de luxo em São Paulo. Projetos residenciais, comerciais e de interiores com iluminação natural e sobriedade estética."
+        path="/"
+        image="assets/images/casa_brise.png"
+      />
       
       {/* 1. SEÇÃO HERO */}
       <HeroSection />
